@@ -12,12 +12,14 @@ Description:GlobalBank is inspired by the RuneScape/WoW style banking. In these 
 BukkitDev: http://dev.bukkit.org/server-mods/globalbank/
 
 **Features:**
+
 * NPC Bankers
 * Multiple Storage Banks
 * Sort Bank Slots.
 * Purchase additional Bank Slots.
 
 **Credits:**
+
 * Top_Cat - NPC lib.
 * VeraLapsa - ItemStack[] Sorting.
 
