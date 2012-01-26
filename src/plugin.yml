@@ -3,7 +3,7 @@ main: me.samkio.globalbank.GlobalBank
 description: Adds a unique item banking system to the game.
 author: Samkio
 website: http://dev.bukkit.org/server-mods/globalbank/
-version: 0.2
+version: 0.3
 depend: [Spout]
 softdepend: [Vault]
 commands:

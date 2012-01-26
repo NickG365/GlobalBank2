@@ -1,12 +1,10 @@
 package me.samkio.globalbank.methods;
 
-import java.util.ArrayList;
-
+import me.samkio.globalbank.Bankventory;
 import me.samkio.globalbank.GlobalBank;
 import me.samkio.globalbank.PlayerState;
 import me.samkio.globalbank.delayedTasks.DelayedBank;
 import me.samkio.globalbank.delayedTasks.DelayedSlot;
-import me.samkio.globalbank.util.SqliteDB;
 import net.milkbowl.vault.economy.EconomyResponse;
 
 import org.bukkit.ChatColor;
@@ -57,14 +55,11 @@ public class SimpleMethods {
 			SimpleMethods.openSlot(b, p, slot);
 			return true;
 		}
-		ArrayList<Integer> ids = new ArrayList<Integer>();
-		if (SqliteDB.containsSlotIds(p.getName())) {
-			ids = SqliteDB.getAvailiableSlots(p.getName());
-		} else {
-			ids.add(1);
-			SqliteDB.newRowSlotIdList(p.getName(), ids);
-		}
-		if (ids.contains((slot + 1))) {
+		Bankventory ba = MiscMethods.getAccount(p);
+			for(int z = 1;z <= (b.s.startWithSlots);z++){
+			ba.getSlotIds().add(z);
+			}
+		if (ba.getSlotIds().contains((slot + 1))) {
 			SimpleMethods.openSlot(b, p, slot);
 			PlayerState.getPlayerState(p).setBuyingSlot(0);
 			return true;
@@ -73,8 +68,7 @@ public class SimpleMethods {
 			if (r.transactionSuccess()) {
 				p.sendMessage(ChatColor.BLUE + "[B]" + ChatColor.WHITE
 						+ " Slot Purchased!");
-				ids.add(slot + 1);
-				SqliteDB.updateSlotList(p.getName(), ids);
+				ba.getSlotIds().add(slot + 1);
 				SimpleMethods.openSlot(b, p, slot);
 				PlayerState.getPlayerState(p).setBuyingSlot(0);
 				return true;
@@ -94,6 +88,6 @@ public class SimpleMethods {
 		}
 	}
 	public static double costOfSlot(int slot){
-		return (GlobalBank.plugin.s.costPerSlot*(GlobalBank.plugin.s.multiplier*(slot)));
+		return (GlobalBank.plugin.s.costPerSlot*(GlobalBank.plugin.s.multiplier*(slot- GlobalBank.plugin.s.startWithSlots)));
 	}
 }

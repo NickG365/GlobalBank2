@@ -41,16 +41,17 @@ public class BInventoryListener extends InventoryListener {
 					e.setCancelled(SimpleMethods.handleBank(b, p, e.getSlot()));
 				}
 			} else if (ps.equals(PlayerStatus.SLOT)) {
-				e.setCancelled(SimpleMethods.handleSlot(e.getItem(), p, e.getInventory(), b));
+				e.setCancelled(SimpleMethods.handleSlot(e.getItem(), p,
+						e.getInventory(), b));
 			}
 
 		} else {
 			if (e.isShiftClick()) {
-				if(ps.equals(PlayerStatus.CHEST_SELECT)){
+				if (ps.equals(PlayerStatus.CHEST_SELECT)) {
 					e.setCancelled(true);
-				}else 
-				if ((e.getItem().getType() == Material.CHEST
-						|| e.getItem().getType() == Material.PAPER) && ps.equals(PlayerStatus.SLOT)) {
+				} else if ((e.getItem().getType() == Material.CHEST || e
+						.getItem().getType() == Material.PAPER)
+						&& ps.equals(PlayerStatus.SLOT)) {
 					e.setCancelled(true);
 				}
 			}

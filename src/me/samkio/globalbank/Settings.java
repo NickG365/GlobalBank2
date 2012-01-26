@@ -15,6 +15,7 @@ public class Settings {
 	public double costPerSlot = 20;
 	public double multiplier = 2;
 	public boolean useEconomy = true;
+    public int startWithSlots = 5;
 
 	public void loadSettings() {
 		File f = new File(m.getDataFolder() + "/Config.yml");
@@ -22,6 +23,7 @@ public class Settings {
 		y.addDefault("Economy.CostPerSlot", 20);
 		y.addDefault("Economy.UseEconomy", true);
 		y.addDefault("Economy.ProgressiveSlotMultiplier", 2);
+		y.addDefault("Slot.BeginWith", 5);
         y.options().copyDefaults(true);
         try {
 			y.save(f);
@@ -32,6 +34,7 @@ public class Settings {
 		this.costPerSlot = y.getDouble("Economy.CostPerSlot");
 		this.useEconomy = y.getBoolean("Economy.UseEconomy");
 		this.multiplier = y.getDouble("Economy.ProgressiveSlotMultiplier");
+		this.startWithSlots = y.getInt("Slot.BeginWith");
 	}
 
 	public Object getValue(String s, Object o) {
