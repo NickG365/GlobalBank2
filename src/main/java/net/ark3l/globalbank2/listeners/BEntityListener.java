@@ -2,23 +2,24 @@ package net.ark3l.globalbank2.listeners;
 
 import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.util.SqliteDB;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
-import org.bukkit.event.entity.EntityListener;
 import org.bukkit.event.entity.EntityTargetEvent;
 
 @SuppressWarnings("deprecation")
-public class BEntityListener extends EntityListener {
+public class BEntityListener implements Listener {
 	public GlobalBank b;
 
 	public BEntityListener(GlobalBank b) {
 		this.b = b;
 	}
 
-	@Override
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityDamage(EntityDamageEvent event) {
 		if (!(event instanceof EntityDamageByEntityEvent)) {
 			return;
@@ -44,7 +45,7 @@ public class BEntityListener extends EntityListener {
 
 	}
 
-	@Override
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onEntityTarget(EntityTargetEvent event) {
 		if (event.getTarget() == null)
 			return;

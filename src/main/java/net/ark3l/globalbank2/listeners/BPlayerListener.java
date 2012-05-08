@@ -3,21 +3,23 @@ package net.ark3l.globalbank2.listeners;
 import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.PlayerState;
 import net.ark3l.globalbank2.methods.SimpleMethods;
-
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerListener;
 
 @SuppressWarnings("deprecation")
-public class BPlayerListener extends PlayerListener {
+public class BPlayerListener implements Listener {
 	private GlobalBank b;
 
 	public BPlayerListener(GlobalBank b) {
 		this.b = b;
 	}
 
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
 		if (b.m.isNPC(e.getRightClicked())) {
 			Player p = e.getPlayer();
@@ -39,6 +41,7 @@ public class BPlayerListener extends PlayerListener {
 		}
 	}
 
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerJoin(PlayerJoinEvent e) {
 		new PlayerState(e.getPlayer());
 	}

@@ -23,7 +23,6 @@ public class InventoryClose implements Runnable {
 		this.slot = slot;
 	}
 
-	@Override
 	public void run() {
 		CraftPlayer craftPlayer = (CraftPlayer) p;
 		EntityPlayer entityPlayer = craftPlayer.getHandle();

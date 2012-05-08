@@ -13,10 +13,9 @@ public class NPCLookers implements Runnable {
 		this.m = m;
 	}
 
-	@Override
 	public void run() {
 		for (NPCEntity e : m.getNPCs()) {
-			Location l = e.getSpoutPlayer().getLocation();
+			Location l = e.getPlayer().getLocation();
 			for (Player p : GlobalBank.plugin.getServer().getOnlinePlayers()) {
 				if (!m.isNPC(p)) {
 					if (!l.getWorld().equals(p.getWorld()))

@@ -4,30 +4,32 @@ import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.PlayerState;
 import net.ark3l.globalbank2.PlayerState.PlayerStatus;
 import net.ark3l.globalbank2.methods.SimpleMethods;
-
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.getspout.spoutapi.event.inventory.InventoryClickEvent;
-import org.getspout.spoutapi.event.inventory.InventoryCloseEvent;
-import org.getspout.spoutapi.event.inventory.InventoryListener;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.event.inventory.InventoryCloseEvent;
 
-public class BInventoryListener extends InventoryListener {
+public class BInventoryListener implements Listener {
 	private GlobalBank b;
 
 	public BInventoryListener(GlobalBank b) {
 		this.b = b;
 	}
 
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInventoryClose(InventoryCloseEvent e) {
 		int i = PlayerState.getPlayerState(e.getPlayer()).getSlot();
 		b.getServer()
 				.getScheduler()
 				.scheduleSyncDelayedTask(
 						b,
-						new InventoryClose(e.getPlayer(), e.getInventory(), e
-								.getBottomInventory(), i), 2);
+						new InventoryClose(e.getPlayer(), e.getInventory(), e.getBottomInventory(), i), 2);
 	}
 
+	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInventoryClick(InventoryClickEvent e) {
 		PlayerStatus ps = PlayerState.getPlayerState(e.getPlayer()).getPs();
 		Player p = e.getPlayer();

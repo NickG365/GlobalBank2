@@ -1,30 +1,28 @@
 package net.ark3l.globalbank2;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.logging.Logger;
-
 import net.ark3l.globalbank2.listeners.BEntityListener;
 import net.ark3l.globalbank2.listeners.BInventoryListener;
 import net.ark3l.globalbank2.listeners.BPlayerListener;
 import net.ark3l.globalbank2.util.Sort;
 import net.ark3l.globalbank2.util.SqliteDB;
 import net.milkbowl.vault.economy.Economy;
-
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.martin.bukkit.npclib.NPCEntity;
 import org.martin.bukkit.npclib.NPCManager;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.logging.Logger;
 
 public class GlobalBank extends JavaPlugin {
 	public static GlobalBank plugin;
@@ -69,8 +67,8 @@ public class GlobalBank extends JavaPlugin {
 		for (Location l : hm.keySet()) {
 			NPCEntity t = m.spawnNPC("Banker", l, hm.get(l));
 			t.setItemInHand(Material.PAPER);
-			t.getSpoutPlayer().setSkin(
-					"http://dl.dropbox.com/u/19653570/bankersskin.png");
+//			t.getSpoutPlayer().setSkin(
+//					"http://dl.dropbox.com/u/19653570/bankersskin.png");
 		}
 
 	}
@@ -102,8 +100,8 @@ public class GlobalBank extends JavaPlugin {
 					NPCEntity t = this.m.spawnNPC("Banker",
 							((Player) sender).getLocation(), args[1]);
 					t.setItemInHand(Material.PAPER);
-					t.getSpoutPlayer().setSkin(
-							"http://dl.dropbox.com/u/19653570/bankersskin.png");
+//					t.getSpoutPlayer().setSkin(
+//							"http://dl.dropbox.com/u/19653570/bankersskin.png");
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
@@ -140,14 +138,9 @@ public class GlobalBank extends JavaPlugin {
 	@SuppressWarnings("deprecation")
 	private void registerListeners() {
 		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvent(Event.Type.PLAYER_INTERACT_ENTITY, this.p,
-				Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.CUSTOM_EVENT, this.i,
-				Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.ENTITY_DAMAGE, this.e,
-				Event.Priority.Normal, this);
-		pm.registerEvent(Event.Type.ENTITY_TARGET, this.e,
-				Event.Priority.Normal, this);
+		pm.registerEvents(p, this);
+		pm.registerEvents(i, this);
+		pm.registerEvents(e, this);
 	}
 
 	private void setupData() {
