@@ -1,12 +1,12 @@
 package net.ark3l.globalbank2;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
+
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Bankventory implements Serializable {
 	private static final long serialVersionUID = 1L;

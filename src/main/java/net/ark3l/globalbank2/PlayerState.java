@@ -1,8 +1,8 @@
 package net.ark3l.globalbank2;
 
-import java.util.HashMap;
-
 import org.bukkit.entity.Player;
+
+import java.util.HashMap;
 
 public class PlayerState {
 	public static HashMap<Player, PlayerState> m = new HashMap<Player, PlayerState>();
@@ -13,7 +13,9 @@ public class PlayerState {
 
 	public enum PlayerStatus {
 		CHEST_SELECT, SLOT, DEFAULT
-	};
+	}
+
+	;
 
 	public PlayerState(Player p) {
 		this.p = p;

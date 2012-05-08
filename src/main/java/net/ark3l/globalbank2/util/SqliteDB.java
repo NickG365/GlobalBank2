@@ -1,18 +1,13 @@
 package net.ark3l.globalbank2.util;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import net.ark3l.globalbank2.GlobalBank;
+import net.ark3l.globalbank2.methods.MiscMethods;
+import org.bukkit.Location;
+
+import java.sql.*;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import net.ark3l.globalbank2.GlobalBank;
-import net.ark3l.globalbank2.methods.MiscMethods;
-
-import org.bukkit.Location;
 
 public class SqliteDB {
 	private static Connection connection;
@@ -65,7 +60,7 @@ public class SqliteDB {
 		}
 	}
 
-	
+
 	public static boolean newBanker(String bankname, Location l) {
 		Connection conn = null;
 		Statement st = null;
@@ -109,7 +104,7 @@ public class SqliteDB {
 			st = conn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM NPCLocations");
 			while (rs.next()) {
-				npcs.put(MiscMethods.locFromString(rs.getString("loc")),rs.getString("bankname"));
+				npcs.put(MiscMethods.locFromString(rs.getString("loc")), rs.getString("bankname"));
 			}
 			conn.commit();
 		} catch (SQLException e) {

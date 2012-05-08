@@ -3,8 +3,8 @@ package net.ark3l.globalbank2.util;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * @version 2.0
  * @author Faye Bickerton AKA VeraLapsa
+ * @version 2.0
  */
 public class Sort {
 
@@ -31,7 +31,7 @@ public class Sort {
 
 			if (item.getAmount() < 64) {
 				int needed = 64 - item.getAmount(); // Number of needed items
-													// until 64
+				// until 64
 
 				// Find another stack of the same type
 				for (int j = i + 1; j < end; j++) {
@@ -47,7 +47,7 @@ public class Sort {
 					// Blocks store their color in the damage value
 					if (item2.getTypeId() == item.getTypeId()
 							&& (!ItemType.usesDamageValue(item.getTypeId()) || item
-									.getDurability() == item2.getDurability())) {
+							.getDurability() == item2.getDurability())) {
 						// This stack won't fit in the parent stack
 						if (item2.getAmount() > needed) {
 							item.setAmount(64);

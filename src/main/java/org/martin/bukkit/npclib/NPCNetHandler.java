@@ -6,23 +6,22 @@ import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 
 /**
- * 
  * @author martin
  */
 public class NPCNetHandler extends NetServerHandler {
 
 	public NPCNetHandler(MinecraftServer minecraftserver,
-			NetworkManager networkmanager, EntityPlayer entityplayer) {
+						 NetworkManager networkmanager, EntityPlayer entityplayer) {
 		super(minecraftserver, networkmanager, entityplayer);
 	}
 
 	@Override
 	public CraftPlayer getPlayer() {
 		return new CraftPlayer((CraftServer) Bukkit.getServer(), player); // Fake
-																			// player
-																			// prevents
-																			// spout
-																			// NPEs
+		// player
+		// prevents
+		// spout
+		// NPEs
 	}
 
 	@Override

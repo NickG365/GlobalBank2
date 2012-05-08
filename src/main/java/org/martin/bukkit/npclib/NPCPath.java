@@ -7,7 +7,6 @@ import org.bukkit.block.Block;
 import java.util.*;
 
 /**
- * 
  * @author Top_Cat
  */
 public class NPCPath {
@@ -40,7 +39,7 @@ public class NPCPath {
 	ArrayList<Node> closed = new ArrayList<Node>();
 	Comparator<Node> nodeComp = new NodeComparator();
 	Node startNode, endNode;
-	Material[] nonSolid = { Material.AIR, Material.SAPLING,
+	Material[] nonSolid = {Material.AIR, Material.SAPLING,
 			Material.POWERED_RAIL, Material.DETECTOR_RAIL, Material.RAILS,
 			Material.YELLOW_FLOWER, Material.RED_ROSE, Material.RED_MUSHROOM,
 			Material.BROWN_MUSHROOM, Material.TORCH, Material.FIRE,
@@ -49,7 +48,7 @@ public class NPCPath {
 			Material.STONE_PLATE, Material.WOOD_PLATE,
 			Material.REDSTONE_TORCH_OFF, Material.REDSTONE_TORCH_ON,
 			Material.SUGAR_CANE_BLOCK, Material.DIODE_BLOCK_OFF,
-			Material.DIODE_BLOCK_ON };
+			Material.DIODE_BLOCK_ON};
 	List<Material> standon = new ArrayList<Material>();
 	List<Material> liquids = new ArrayList<Material>();
 
@@ -91,8 +90,8 @@ public class NPCPath {
 		Node adjacentBlock;
 		int rep = 0;
 		while (c != endNode && rep < max) { // Repetition variable prevents
-											// infinite loop when destination is
-											// unreachable
+			// infinite loop when destination is
+			// unreachable
 			rep++;
 			closed.add(c);
 			open.remove(c);
@@ -103,7 +102,7 @@ public class NPCPath {
 						adjacentBlock = getNode(c.b.getRelative(i, j, k));
 						if (adjacentBlock != c
 								&& !(j == 1 && adjacentBlock.b.getRelative(0,
-										-1, 0).getType() == Material.FENCE)) {
+								-1, 0).getType() == Material.FENCE)) {
 							scoreBlock(adjacentBlock, c);
 						}
 					}
@@ -170,7 +169,7 @@ public class NPCPath {
 
 		return !corner
 				&& ((node.notsolid
-						&& (!nodeBelow.notsolid || (nodeBelow.liquid && node.liquid)) && nodeAbove.notsolid) || node == endNode);
+				&& (!nodeBelow.notsolid || (nodeBelow.liquid && node.liquid)) && nodeAbove.notsolid) || node == endNode);
 	}
 
 	private void scoreBlock(Node node, Node parent) {

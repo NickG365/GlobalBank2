@@ -23,7 +23,7 @@ public class BPlayerListener implements Listener {
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
 		if (b.m.isNPC(e.getRightClicked())) {
 			Player p = e.getPlayer();
-			if(!p.hasPermission("gb.use")){
+			if (!p.hasPermission("gb.use")) {
 				p.sendMessage(ChatColor.BLUE
 						+ "[B]"
 						+ ChatColor.RED

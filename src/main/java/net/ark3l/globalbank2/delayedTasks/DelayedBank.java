@@ -5,7 +5,6 @@ import net.ark3l.globalbank2.PlayerState;
 import net.ark3l.globalbank2.PlayerState.PlayerStatus;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -35,7 +34,7 @@ public class DelayedBank implements Runnable {
 		if (p.getName().length() > 11)
 			s = s.substring(0, 10);
 		;
-		Inventory inv = b.getServer().createInventory(p, InventoryType.CHEST);
+		Inventory inv = b.getServer().createInventory(p, 54);
 		inv.setContents(content);
 		p.openInventory(inv);
 		//CustomInventory ci = new CustomInventory(content, "Bank:" + s);

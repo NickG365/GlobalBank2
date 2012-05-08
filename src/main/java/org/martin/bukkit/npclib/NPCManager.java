@@ -18,7 +18,6 @@ import java.util.*;
 import java.util.logging.Level;
 
 /**
- * 
  * @author martin
  */
 @SuppressWarnings("deprecation")
@@ -87,14 +86,14 @@ public class NPCManager {
 	}
 
 	public NPCEntity spawnNPC(String name, Location l, String id,
-			String bankName) {
+							  String bankName) {
 		if (npcs.containsKey(id)) {
 			server.getLogger().log(Level.WARNING,
 					"NPC with that id already exists, existing NPC returned");
 			return npcs.get(id);
 		} else {
 			if (name.length() > 16) { // Check and nag if name is too long,
-										// spawn NPC anyway with shortened name.
+				// spawn NPC anyway with shortened name.
 				String tmp = name.substring(0, 16);
 				server.getLogger().log(Level.WARNING,
 						"NPCs can't have names longer than 16 characters,");
@@ -105,7 +104,7 @@ public class NPCManager {
 			BWorld world = new BWorld(l.getWorld());
 			NPCEntity npcEntity = new NPCEntity(server.getMCServer(),
 					world.getWorldServer(), name, new ItemInWorldManager(
-							world.getWorldServer()), bankName);
+					world.getWorldServer()), bankName);
 			npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(),
 					l.getYaw(), l.getPitch());
 			world.getWorldServer().addEntity(npcEntity); // the right way
@@ -251,7 +250,7 @@ public class NPCManager {
 
 	public void rename(String id, String name) {
 		if (name.length() > 16) { // Check and nag if name is too long, spawn
-									// NPC anyway with shortened name.
+			// NPC anyway with shortened name.
 			String tmp = name.substring(0, 16);
 			server.getLogger().log(Level.WARNING,
 					"NPCs can't have names longer than 16 characters,");
@@ -265,11 +264,11 @@ public class NPCManager {
 		WorldServer s = b.getWorldServer();
 		try {
 			Method m = s.getClass().getDeclaredMethod("d",
-					new Class[] { Entity.class });
+					new Class[]{Entity.class});
 			m.setAccessible(true);
 			m.invoke(s, (Entity) npc);
 			m = s.getClass().getDeclaredMethod("c",
-					new Class[] { Entity.class });
+					new Class[]{Entity.class});
 			m.setAccessible(true);
 			m.invoke(s, (Entity) npc);
 		} catch (Exception ex) {

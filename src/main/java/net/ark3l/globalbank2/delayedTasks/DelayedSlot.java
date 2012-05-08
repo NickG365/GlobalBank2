@@ -6,7 +6,6 @@ import net.ark3l.globalbank2.PlayerState.PlayerStatus;
 import net.ark3l.globalbank2.methods.SlotDataMethods;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
@@ -38,14 +37,15 @@ public class DelayedSlot implements Runnable {
 		if (SlotDataMethods.getAccContent(p, i + 1) != null) {
 			is = SlotDataMethods.getAccContent(p, i + 1).clone();
 			for (int i = 0; i < is.length; i++) {
-				if(is[i]!=null){
-				content[i + 2] = is[i].clone();
-				}else{
+				if (is[i] != null) {
+					content[i + 2] = is[i].clone();
+				} else {
 					content[i + 2] = null;
 				}
 			}
 		}
-		Inventory inv = b.getServer().createInventory(p, InventoryType.CHEST);
+
+		Inventory inv = b.getServer().createInventory(p, 54);
 		inv.setContents(content);
 		p.openInventory(inv);
 		//CustomInventory ci = new CustomInventory(content.clone(), "Slot: " + (i + 1));

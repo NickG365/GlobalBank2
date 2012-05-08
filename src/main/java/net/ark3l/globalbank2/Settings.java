@@ -1,21 +1,22 @@
 package net.ark3l.globalbank2;
 
+import org.bukkit.configuration.file.YamlConfiguration;
+
 import java.io.File;
 import java.io.IOException;
-
-import org.bukkit.configuration.file.YamlConfiguration;
 
 public class Settings {
 	private GlobalBank m;
 	private YamlConfiguration y;
-	public Settings(GlobalBank m){
-		this.m=m;
+
+	public Settings(GlobalBank m) {
+		this.m = m;
 	}
-	
+
 	public double costPerSlot = 20;
 	public double multiplier = 2;
 	public boolean useEconomy = true;
-    public int startWithSlots = 5;
+	public int startWithSlots = 5;
 
 	public void loadSettings() {
 		File f = new File(m.getDataFolder() + "/Config.yml");
@@ -24,13 +25,14 @@ public class Settings {
 		y.addDefault("Economy.UseEconomy", true);
 		y.addDefault("Economy.ProgressiveSlotMultiplier", 2);
 		y.addDefault("Slot.BeginWith", 5);
-        y.options().copyDefaults(true);
-        try {
+		y.options().copyDefaults(true);
+		try {
 			y.save(f);
 		} catch (IOException e) {
 		}
 	}
-	public void getSettings(){
+
+	public void getSettings() {
 		this.costPerSlot = y.getDouble("Economy.CostPerSlot");
 		this.useEconomy = y.getBoolean("Economy.UseEconomy");
 		this.multiplier = y.getDouble("Economy.ProgressiveSlotMultiplier");
@@ -45,7 +47,7 @@ public class Settings {
 	}
 
 	public Integer getIntegerValue(String s,
-			Integer i) {
+								   Integer i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Integer) ? (Integer) o : i;
 	}
@@ -56,7 +58,7 @@ public class Settings {
 	}
 
 	public Boolean getBooleanValue(String s,
-			Boolean i) {
+								   Boolean i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Boolean) ? (Boolean) o : i;
 	}

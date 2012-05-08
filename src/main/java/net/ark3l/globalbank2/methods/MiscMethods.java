@@ -1,16 +1,11 @@
 package net.ark3l.globalbank2.methods;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 import net.ark3l.globalbank2.Bankventory;
 import net.ark3l.globalbank2.GlobalBank;
-
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import java.io.*;
 
 public class MiscMethods {
 	public static Location locFromString(String s) {

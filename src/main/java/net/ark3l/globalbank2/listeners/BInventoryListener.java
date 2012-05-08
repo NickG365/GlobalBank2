@@ -21,29 +21,27 @@ public class BInventoryListener implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInventoryClose(InventoryCloseEvent e) {
-		int i = PlayerState.getPlayerState(e.getPlayer()).getSlot();
-		b.getServer()
-				.getScheduler()
-				.scheduleSyncDelayedTask(
-						b,
-						new InventoryClose(e.getPlayer(), e.getInventory(), e.getBottomInventory(), i), 2);
+		if (!(e.getPlayer() instanceof Player)) return;
+		int i = PlayerState.getPlayerState((Player) e.getPlayer()).getSlot();
+		b.getServer().getScheduler().scheduleSyncDelayedTask(b, new InventoryClose((Player) e.getPlayer(), e.getInventory(), i), 2);
 	}
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInventoryClick(InventoryClickEvent e) {
-		PlayerStatus ps = PlayerState.getPlayerState(e.getPlayer()).getPs();
-		Player p = e.getPlayer();
-		if (e.getItem() == null)
+		if (!(e.getWhoClicked() instanceof Player)) return;
+		PlayerStatus ps = PlayerState.getPlayerState((Player) e.getWhoClicked()).getPs();
+		Player p = ((Player) e.getWhoClicked());
+		if (e.getCurrentItem() == null)
 			return;
 		if (!b.isk.containsKey(p))
 			return;
-		if (b.isk.get(p).contains(e.getItem())) {
+		if (b.isk.get(p).contains(e.getCurrentItem())) {
 			if (ps.equals(PlayerStatus.CHEST_SELECT)) {
-				if (e.getItem().getType() == Material.CHEST) {
+				if (e.getCurrentItem().getType() == Material.CHEST) {
 					e.setCancelled(SimpleMethods.handleBank(b, p, e.getSlot()));
 				}
 			} else if (ps.equals(PlayerStatus.SLOT)) {
-				e.setCancelled(SimpleMethods.handleSlot(e.getItem(), p,
+				e.setCancelled(SimpleMethods.handleSlot(e.getCurrentItem(), p,
 						e.getInventory(), b));
 			}
 
@@ -51,8 +49,8 @@ public class BInventoryListener implements Listener {
 			if (e.isShiftClick()) {
 				if (ps.equals(PlayerStatus.CHEST_SELECT)) {
 					e.setCancelled(true);
-				} else if ((e.getItem().getType() == Material.CHEST || e
-						.getItem().getType() == Material.PAPER)
+				} else if ((e.getCurrentItem().getType() == Material.CHEST || e
+						.getCurrentItem().getType() == Material.PAPER)
 						&& ps.equals(PlayerStatus.SLOT)) {
 					e.setCancelled(true);
 				}

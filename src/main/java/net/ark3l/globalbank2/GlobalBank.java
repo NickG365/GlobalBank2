@@ -33,7 +33,7 @@ public class GlobalBank extends JavaPlugin {
 	public NPCManager m = null;
 	public Settings s = new Settings(this);
 	public HashMap<Player, ArrayList<ItemStack>> isk = new HashMap<Player, ArrayList<ItemStack>>();
-	public HashMap<Player,Bankventory> bankventories = new HashMap<Player,Bankventory>();
+	public HashMap<Player, Bankventory> bankventories = new HashMap<Player, Bankventory>();
 	public ArrayList<Player> punchers = new ArrayList<Player>();
 	public Sort sort = new Sort();
 	public Economy economy = null;
@@ -61,8 +61,6 @@ public class GlobalBank extends JavaPlugin {
 
 	private void npcSetup() {
 		this.m = new NPCManager(this);
-		this.getServer().getScheduler()
-				.scheduleSyncRepeatingTask(this, new NPCLookers(m), 5, 5);
 		HashMap<Location, String> hm = SqliteDB.getBankers();
 		for (Location l : hm.keySet()) {
 			NPCEntity t = m.spawnNPC("Banker", l, hm.get(l));
@@ -91,7 +89,7 @@ public class GlobalBank extends JavaPlugin {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd,
-			String commandLabel, String[] args) {
+							 String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("gb") && sender instanceof Player) {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1
@@ -111,7 +109,7 @@ public class GlobalBank extends JavaPlugin {
 							+ ChatColor.WHITE
 							+ "Please punch a Banker to remove them.");
 					this.punchers.add((Player) sender);
-				}  else {
+				} else {
 					sender.sendMessage(ChatColor.BLUE
 							+ "[GlobalBank] "
 							+ ChatColor.WHITE

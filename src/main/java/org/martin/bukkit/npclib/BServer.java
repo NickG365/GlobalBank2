@@ -1,24 +1,20 @@
 package org.martin.bukkit.npclib;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import jline.ConsoleReader;
-import net.minecraft.server.MinecraftServer;
-import net.minecraft.server.NetworkListenThread;
-import net.minecraft.server.PropertyManager;
-import net.minecraft.server.ServerConfigurationManager;
-import net.minecraft.server.WorldServer;
-
+import net.minecraft.server.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.command.CommandSender;
 import org.bukkit.craftbukkit.CraftServer;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * Server hacks for Bukkit
- * 
+ *
  * @author Kekec852
  */
 public class BServer {

@@ -7,7 +7,6 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
- * 
  * @author martin
  */
 public class NullSocket extends Socket {

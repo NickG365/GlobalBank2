@@ -19,7 +19,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * 
  * @author martin
  */
 public class NPCEntity extends EntityPlayer {
@@ -35,16 +34,16 @@ public class NPCEntity extends EntityPlayer {
 	public String BankName;
 
 	public NPCEntity(MinecraftServer minecraftserver, World world, String s,
-			ItemInWorldManager iteminworldmanager, String bankName) {
+					 ItemInWorldManager iteminworldmanager, String bankName) {
 		super(minecraftserver, world, s, iteminworldmanager);
 		iteminworldmanager.b(0);
 		NetworkManager netMgr = new NPCNetworkManager(new NullSocket(),
 				"NPC Manager", new NetHandler() {
-					@Override
-					public boolean c() {
-						return true;
-					}
-				});
+			@Override
+			public boolean c() {
+				return true;
+			}
+		});
 		this.netServerHandler = new NPCNetHandler(minecraftserver, netMgr, this);
 		this.lastTargetId = -1;
 		this.lastBounceId = -1;

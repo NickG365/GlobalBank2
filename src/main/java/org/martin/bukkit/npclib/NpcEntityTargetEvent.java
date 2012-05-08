@@ -14,7 +14,7 @@ public class NpcEntityTargetEvent extends EntityTargetEvent {
 	private NpcTargetReason reason;
 
 	public NpcEntityTargetEvent(Entity entity, Entity target,
-			NpcTargetReason reason) {
+								NpcTargetReason reason) {
 		super(entity, target, TargetReason.CUSTOM);
 		this.reason = reason;
 	}
