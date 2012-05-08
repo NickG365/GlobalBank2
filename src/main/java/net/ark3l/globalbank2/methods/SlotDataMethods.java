@@ -13,9 +13,7 @@ public class SlotDataMethods {
 
 	public static ItemStack[] removeFirst2(ItemStack[] is) {
 		ItemStack[] sendMe = new ItemStack[52];
-		for (int i = 2; i < 54; i++) {
-			sendMe[i - 2] = is[i];
-		}
+		System.arraycopy(is, 2, sendMe, 0, 54 - 2);
 		return sendMe;
 	}
 

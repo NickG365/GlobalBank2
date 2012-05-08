@@ -40,7 +40,6 @@ public class BEntityListener implements Listener {
 				}
 			}
 			event.setCancelled(true);
-			return;
 		}
 
 	}
@@ -51,7 +50,6 @@ public class BEntityListener implements Listener {
 			return;
 		if (b.m.isNPC(event.getTarget())) {
 			event.setCancelled(true);
-			return;
 		}
 
 	}

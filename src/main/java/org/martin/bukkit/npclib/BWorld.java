@@ -70,11 +70,11 @@ public class BWorld {
 	}
 
 	public boolean createExplosion(double x, double y, double z, float power) {
-		return wServer.explode(null, x, y, z, power).wasCanceled ? false : true;
+		return !wServer.explode(null, x, y, z, power).wasCanceled;
 	}
 
 	public boolean createExplosion(Location l, float power) {
-		return wServer.explode(null, l.getX(), l.getY(), l.getZ(), power).wasCanceled ? false : true;
+		return !wServer.explode(null, l.getX(), l.getY(), l.getZ(), power).wasCanceled;
 	}
 
 	@SuppressWarnings("unchecked")

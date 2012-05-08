@@ -29,6 +29,7 @@ public class Settings {
 		try {
 			y.save(f);
 		} catch (IOException e) {
+			m.getLogger().severe("Error loading settings.");
 		}
 	}
 
