@@ -3,6 +3,7 @@ package net.ark3l.globalbank2;
 import net.ark3l.globalbank2.listeners.BEntityListener;
 import net.ark3l.globalbank2.listeners.BInventoryListener;
 import net.ark3l.globalbank2.listeners.BPlayerListener;
+import net.ark3l.globalbank2.util.Log;
 import net.ark3l.globalbank2.util.Metrics;
 import net.ark3l.globalbank2.util.Sort;
 import net.ark3l.globalbank2.util.SqliteDB;
@@ -24,11 +25,9 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 public class GlobalBank extends JavaPlugin {
 	public static GlobalBank plugin;
-	public static Logger log = Logger.getLogger("Minecraft");
 	public BPlayerListener p = new BPlayerListener(this);
 	public BEntityListener e = new BEntityListener(this);
 	public BInventoryListener i;
@@ -57,11 +56,10 @@ public class GlobalBank extends JavaPlugin {
 			Metrics metrics = new Metrics(this);
 			metrics.start();
 		} catch (IOException e1) {
-			log.warning("Error submitting usage statistics");
+			Log.warning("Error submitting usage statistics");
 		}
 
-		log.info("[GB] GlobalBank v." + this.getDescription().getVersion()
-				+ " Enabled");
+		Log.info(this + " enabled!");
 	}
 
 	private void setupConfig() {
@@ -82,8 +80,7 @@ public class GlobalBank extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		log.info("[GB] GlobalBank v." + this.getDescription().getVersion()
-				+ " Disabled");
+		Log.info(this + " disabled!");
 		m.despawnAll();
 	}
 
@@ -143,7 +140,6 @@ public class GlobalBank extends JavaPlugin {
 		}
 	}
 
-	@SuppressWarnings("deprecation")
 	private void registerListeners() {
 		PluginManager pm = this.getServer().getPluginManager();
 		pm.registerEvents(p, this);

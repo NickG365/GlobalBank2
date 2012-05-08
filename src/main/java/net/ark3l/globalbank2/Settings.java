@@ -1,5 +1,6 @@
 package net.ark3l.globalbank2;
 
+import net.ark3l.globalbank2.util.Log;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
@@ -29,7 +30,7 @@ public class Settings {
 		try {
 			y.save(f);
 		} catch (IOException e) {
-			m.getLogger().severe("Error loading settings.");
+			Log.severe("Error loading settings.");
 		}
 	}
 
