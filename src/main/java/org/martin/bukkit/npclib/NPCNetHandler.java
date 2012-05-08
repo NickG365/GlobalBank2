@@ -11,7 +11,7 @@ import org.bukkit.craftbukkit.entity.CraftPlayer;
 public class NPCNetHandler extends NetServerHandler {
 
 	public NPCNetHandler(MinecraftServer minecraftserver,
-						 NetworkManager networkmanager, EntityPlayer entityplayer) {
+	                     NetworkManager networkmanager, EntityPlayer entityplayer) {
 		super(minecraftserver, networkmanager, entityplayer);
 	}
 

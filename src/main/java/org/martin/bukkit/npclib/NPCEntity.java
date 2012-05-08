@@ -32,7 +32,7 @@ public class NPCEntity extends EntityPlayer {
 	public String BankName;
 
 	public NPCEntity(MinecraftServer minecraftserver, World world, String s,
-					 ItemInWorldManager iteminworldmanager, String bankName) {
+	                 ItemInWorldManager iteminworldmanager, String bankName) {
 		super(minecraftserver, world, s, iteminworldmanager);
 		iteminworldmanager.b(0);
 		NetworkManager netMgr = new NPCNetworkManager(new NullSocket(),

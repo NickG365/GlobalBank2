@@ -96,7 +96,7 @@ public class GlobalBank extends JavaPlugin {
 	}
 
 	public boolean onCommand(CommandSender sender, Command cmd,
-							 String commandLabel, String[] args) {
+	                         String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("gb") && sender instanceof Player) {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1

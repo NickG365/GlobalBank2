@@ -49,7 +49,7 @@ public class Settings {
 	}
 
 	public Integer getIntegerValue(String s,
-								   Integer i) {
+	                               Integer i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Integer) ? (Integer) o : i;
 	}
@@ -60,7 +60,7 @@ public class Settings {
 	}
 
 	public Boolean getBooleanValue(String s,
-								   Boolean i) {
+	                               Boolean i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Boolean) ? (Boolean) o : i;
 	}

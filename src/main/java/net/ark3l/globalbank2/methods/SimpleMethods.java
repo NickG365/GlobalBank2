@@ -25,7 +25,7 @@ public class SimpleMethods {
 	}
 
 	public static boolean handleSlot(ItemStack i, Player p, Inventory inv,
-									 GlobalBank b) {
+	                                 GlobalBank b) {
 		if (i.getType() == Material.CHEST) {
 			SlotDataMethods.saveBank(p, inv.getContents().clone(), PlayerState
 					.getPlayerState(p).getSlot());

@@ -52,7 +52,6 @@ public class NPCManager {
 	}
 
 	private class SL implements Listener {
-		@SuppressWarnings("unused")
 		@EventHandler
 		public void onPluginDisable(PluginDisableEvent event) {
 			if (event.getPlugin() == plugin) {
@@ -63,7 +62,6 @@ public class NPCManager {
 	}
 
 	private class WL implements Listener {
-		@SuppressWarnings("unused")
 		@EventHandler
 		public void onChunkLoad(ChunkLoadEvent event) {
 			for (NPCEntity npc : npcs.values()) {
@@ -86,7 +84,7 @@ public class NPCManager {
 	}
 
 	public NPCEntity spawnNPC(String name, Location l, String id,
-							  String bankName) {
+	                          String bankName) {
 		if (npcs.containsKey(id)) {
 			server.getLogger().log(Level.WARNING,
 					"NPC with that id already exists, existing NPC returned");
