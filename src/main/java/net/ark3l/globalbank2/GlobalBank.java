@@ -3,6 +3,7 @@ package net.ark3l.globalbank2;
 import net.ark3l.globalbank2.listeners.BEntityListener;
 import net.ark3l.globalbank2.listeners.BInventoryListener;
 import net.ark3l.globalbank2.listeners.BPlayerListener;
+import net.ark3l.globalbank2.util.Metrics;
 import net.ark3l.globalbank2.util.Sort;
 import net.ark3l.globalbank2.util.SqliteDB;
 import net.milkbowl.vault.economy.Economy;
@@ -20,6 +21,7 @@ import org.martin.bukkit.npclib.NPCEntity;
 import org.martin.bukkit.npclib.NPCManager;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.logging.Logger;
@@ -50,6 +52,14 @@ public class GlobalBank extends JavaPlugin {
 				&& s.useEconomy) {
 			setupEconomy();
 		}
+
+		try {
+			Metrics metrics = new Metrics(this);
+			metrics.start();
+		} catch (IOException e1) {
+			log.warning("Error submitting usage statistics");
+		}
+
 		log.info("[GB] GlobalBank v." + this.getDescription().getVersion()
 				+ " Enabled");
 	}
