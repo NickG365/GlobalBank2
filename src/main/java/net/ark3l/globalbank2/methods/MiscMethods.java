@@ -2,6 +2,7 @@ package net.ark3l.globalbank2.methods;
 
 import net.ark3l.globalbank2.Bankventory;
 import net.ark3l.globalbank2.GlobalBank;
+import net.ark3l.globalbank2.util.Log;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
@@ -37,7 +38,8 @@ public class MiscMethods {
 				GlobalBank.plugin.bankventories.put(p, b);
 				return b;
 			} catch (Exception e) {
-				GlobalBank.log.info("[GB]" + e);
+				Log.severe("Could not get account for " + p.getName());
+				e.printStackTrace();
 			}
 		} else {
 			Bankventory b = new Bankventory();
@@ -50,7 +52,8 @@ public class MiscMethods {
 				oos.close();
 				fos.close();
 			} catch (Exception e) {
-				GlobalBank.log.info("[GB]" + e);
+				Log.severe("Could not get account for " + p.getName());
+				e.printStackTrace();
 			}
 			GlobalBank.plugin.bankventories.put(p, b);
 			return b;
@@ -71,7 +74,8 @@ public class MiscMethods {
 				oos.close();
 				fos.close();
 			} catch (Exception e) {
-				GlobalBank.log.info("[GB]" + e);
+				Log.severe("Could not save banks!");
+				e.printStackTrace();
 			}
 		}
 	}
