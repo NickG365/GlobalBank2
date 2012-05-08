@@ -1,22 +1,18 @@
 package org.martin.bukkit.npclib;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import net.minecraft.server.AxisAlignedBB;
-import net.minecraft.server.Entity;
-import net.minecraft.server.EntityPlayer;
-import net.minecraft.server.PlayerManager;
-import net.minecraft.server.WorldProvider;
-import net.minecraft.server.WorldServer;
+import net.minecraft.server.*;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftWorld;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * 
@@ -75,12 +71,11 @@ public class BWorld {
 	}
 
 	public boolean createExplosion(double x, double y, double z, float power) {
-		return wServer.a(null, x, y, z, power).wasCanceled ? false : true;
+		return wServer.explode(null, x, y, z, power).wasCanceled ? false : true;
 	}
 
 	public boolean createExplosion(Location l, float power) {
-		return wServer.a(null, l.getX(), l.getY(), l.getZ(), power).wasCanceled ? false
-				: true;
+		return wServer.explode(null, l.getX(), l.getY(), l.getZ(), power).wasCanceled ? false : true;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -103,7 +98,7 @@ public class BWorld {
 						AxisAlignedBB bb = AxisAlignedBB.a(x - radius, y
 								- radius, z - radius, x + radius, y + radius, z
 								+ radius);
-						entities = craftWorld.getHandle().a(craftPlayer.getHandle(), bb);
+						entities = craftWorld.getHandle().getEntities(craftPlayer.getHandle(), bb);
 						//craftWorld.getHandle().a(arg0, arg1)
 						for (Entity o : entities) {
 							if (!(o instanceof EntityPlayer)) {

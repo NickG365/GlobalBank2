@@ -1,15 +1,10 @@
 package org.martin.bukkit.npclib;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
+
+import java.util.*;
 
 /**
  * 
@@ -136,7 +131,6 @@ public class NPCPath {
 
 	public class NodeComparator implements Comparator<Node> {
 
-		@Override
 		public int compare(Node o1, Node o2) {
 			if (o1.f > o2.f) {
 				return 1;

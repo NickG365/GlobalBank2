@@ -1,28 +1,21 @@
 package org.martin.bukkit.npclib;
 
-import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.logging.Level;
-
 import net.minecraft.server.Entity;
 import net.minecraft.server.ItemInWorldManager;
 import net.minecraft.server.WorldServer;
-
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.entity.CraftEntity;
 import org.bukkit.entity.HumanEntity;
-import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.event.server.ServerListener;
 import org.bukkit.event.world.ChunkLoadEvent;
-import org.bukkit.event.world.WorldListener;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.lang.reflect.Method;
+import java.util.*;
+import java.util.logging.Level;
 
 /**
  * 
@@ -45,7 +38,7 @@ public class NPCManager {
 						HashSet<String> toRemove = new HashSet<String>();
 						for (String i : npcs.keySet()) {
 							Entity j = npcs.get(i);
-							j.am();
+							j.aA();
 							if (j.dead) {
 								toRemove.add(i);
 							}
@@ -55,18 +48,13 @@ public class NPCManager {
 						}
 					}
 				}, 1L, 1L);
-		Bukkit.getServer()
-				.getPluginManager()
-				.registerEvent(Event.Type.PLUGIN_DISABLE, new SL(),
-						Priority.Normal, plugin);
-		Bukkit.getServer()
-				.getPluginManager()
-				.registerEvent(Event.Type.CHUNK_LOAD, new WL(),
-						Priority.Normal, plugin);
+		Bukkit.getServer().getPluginManager().registerEvents(new SL(), plugin);
+		Bukkit.getServer().getPluginManager().registerEvents(new WL(), plugin);
 	}
 
-	private class SL extends ServerListener {
-		@Override
+	private class SL implements Listener {
+		@SuppressWarnings("unused")
+		@EventHandler
 		public void onPluginDisable(PluginDisableEvent event) {
 			if (event.getPlugin() == plugin) {
 				despawnAll();
@@ -75,13 +63,12 @@ public class NPCManager {
 		}
 	}
 
-	private class WL extends WorldListener {
-		@Override
+	private class WL implements Listener {
+		@SuppressWarnings("unused")
+		@EventHandler
 		public void onChunkLoad(ChunkLoadEvent event) {
 			for (NPCEntity npc : npcs.values()) {
-				if (npc != null
-						&& event.getChunk() == npc.getBukkitEntity()
-								.getLocation().getBlock().getChunk()) {
+				if (npc != null && event.getChunk() == npc.getBukkitEntity().getLocation().getBlock().getChunk()) {
 					BWorld world = new BWorld(event.getWorld());
 					world.getWorldServer().addEntity(npc);
 				}
