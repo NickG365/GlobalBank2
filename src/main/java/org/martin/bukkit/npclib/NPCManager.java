@@ -239,7 +239,7 @@ public class NPCManager {
 	public String getNPCIdFromEntity(org.bukkit.entity.Entity e) {
 		if (e instanceof HumanEntity) {
 			for (String i : npcs.keySet()) {
-				if (npcs.get(i).getBukkitEntity().getEntityId() == ((HumanEntity) e)
+				if (npcs.get(i).getBukkitEntity().getEntityId() == e
 						.getEntityId()) {
 					return i;
 				}

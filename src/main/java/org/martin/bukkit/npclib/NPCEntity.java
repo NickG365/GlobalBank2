@@ -7,8 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
-import org.bukkit.entity.HumanEntity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityTargetEvent;
 import org.bukkit.inventory.ItemStack;
@@ -100,7 +98,7 @@ public class NPCEntity extends EntityPlayer {
 		if (getBukkitEntity().getWorld() != point.getWorld()) {
 			return;
 		}
-		Location npcLoc = ((LivingEntity) getBukkitEntity()).getEyeLocation();
+		Location npcLoc = getBukkitEntity().getEyeLocation();
 		double xDiff = point.getX() - npcLoc.getX();
 		double yDiff = point.getY() - npcLoc.getY();
 		double zDiff = point.getZ() - npcLoc.getZ();
@@ -121,7 +119,7 @@ public class NPCEntity extends EntityPlayer {
 
 			if (!(getBukkitEntity() instanceof CraftPlayer)) {
 				setBukkitEntity(new CraftPlayer(
-						(CraftServer) Bukkit.getServer(), (EntityPlayer) this));
+						(CraftServer) Bukkit.getServer(), this));
 			}
 
 			return getBukkitEntity();
@@ -148,7 +146,7 @@ public class NPCEntity extends EntityPlayer {
 		EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(),
 				entity.getBukkitEntity(),
 				NpcEntityTargetEvent.NpcTargetReason.NPC_RIGHTCLICKED);
-		CraftServer server = ((WorldServer) this.world).getServer();
+		CraftServer server = this.world.getServer();
 		server.getPluginManager().callEvent(event);
 
 		return super.b(entity);
@@ -160,7 +158,7 @@ public class NPCEntity extends EntityPlayer {
 			EntityTargetEvent event = new NpcEntityTargetEvent(
 					getBukkitEntity(), entity.getBukkitEntity(),
 					NpcEntityTargetEvent.NpcTargetReason.CLOSEST_PLAYER);
-			CraftServer server = ((WorldServer) this.world).getServer();
+			CraftServer server = this.world.getServer();
 			server.getPluginManager().callEvent(event);
 		}
 		lastTargetId = entity.id;
@@ -175,7 +173,7 @@ public class NPCEntity extends EntityPlayer {
 			EntityTargetEvent event = new NpcEntityTargetEvent(
 					getBukkitEntity(), entity.getBukkitEntity(),
 					NpcEntityTargetEvent.NpcTargetReason.NPC_BOUNCED);
-			CraftServer server = ((WorldServer) this.world).getServer();
+			CraftServer server = this.world.getServer();
 			server.getPluginManager().callEvent(event);
 
 			lastBounceTick = System.currentTimeMillis();
@@ -187,7 +185,7 @@ public class NPCEntity extends EntityPlayer {
 	}
 
 	public PlayerInventory getInventory() {
-		return ((HumanEntity) getBukkitEntity()).getInventory();
+		return getBukkitEntity().getInventory();
 	}
 
 	public void setItemInHand(Material m) {
@@ -195,7 +193,7 @@ public class NPCEntity extends EntityPlayer {
 	}
 
 	public void setItemInHand(Material m, short damage) {
-		((HumanEntity) getBukkitEntity()).setItemInHand(new ItemStack(m, 1,
+		getBukkitEntity().setItemInHand(new ItemStack(m, 1,
 				damage));
 	}
 

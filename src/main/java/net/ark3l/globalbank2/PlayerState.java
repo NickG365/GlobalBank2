@@ -15,8 +15,6 @@ public class PlayerState {
 		CHEST_SELECT, SLOT, DEFAULT
 	}
 
-	;
-
 	public PlayerState(Player p) {
 		this.p = p;
 		PlayerState.m.put(p, this);
