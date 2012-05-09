@@ -6,12 +6,9 @@ import org.bukkit.Location;
 
 import java.sql.*;
 import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class SqliteDB {
 	private static Connection connection;
-	public final static Logger logger = Logger.getLogger("Minecraft");
 
 	public static synchronized Connection getConnection() {
 		if (connection == null) {
@@ -24,7 +21,8 @@ public class SqliteDB {
 		try {
 			connection.close();
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "[GlobalBank]" + e);
+			Log.severe("Could not close connection to database");
+			Log.severe(e.getMessage());
 		}
 	}
 
@@ -37,10 +35,12 @@ public class SqliteDB {
 			ret.setAutoCommit(false);
 			return ret;
 		} catch (ClassNotFoundException e) {
-			logger.log(Level.SEVERE, "[GlobalBank]" + e);
+			Log.severe("Could not create connection to database");
+			e.printStackTrace();
 			return null;
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE, "[GlobalBank]" + e);
+			Log.severe("Could not create connection to database");
+			e.printStackTrace();
 		}
 		return null;
 	}
@@ -54,9 +54,8 @@ public class SqliteDB {
 			st.executeUpdate("CREATE TABLE IF NOT EXISTS NPCLocations (id INTEGER PRIMARY KEY, bankName VARCHAR(80) NOT NULL, loc TEXT NOT NULL);");
 			conn.commit();
 		} catch (SQLException e) {
-			logger.log(Level.SEVERE,
-					"[GlobalBank] Cannot connect to Sqlite Database");
-			logger.log(Level.SEVERE, "[GlobalBank] " + e);
+			Log.severe("Cannot connect to SQLite database!");
+			e.printStackTrace();
 		}
 	}
 
@@ -71,7 +70,8 @@ public class SqliteDB {
 					+ bankname + "','" + MiscMethods.stringFromLoc(l) + "')");
 			conn.commit();
 		} catch (SQLException e) {
-			logger.severe("[GlobalBank] Unable to add row to database " + e);
+			Log.severe("Unable to add row to database!");
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -88,7 +88,8 @@ public class SqliteDB {
 					+ bankname + "'");
 			conn.commit();
 		} catch (SQLException e) {
-			logger.severe("[GlobalBank] Unable to remove row to database " + e);
+			Log.severe("Unable to remove row from database!");
+			e.printStackTrace();
 			return false;
 		}
 		return true;
@@ -108,7 +109,8 @@ public class SqliteDB {
 			}
 			conn.commit();
 		} catch (SQLException e) {
-			logger.severe("[GlobalBank] Unable to get row from database " + e);
+			Log.severe("Unable to fetch row from database!");
+			e.printStackTrace();
 			return npcs;
 		}
 		return npcs;
