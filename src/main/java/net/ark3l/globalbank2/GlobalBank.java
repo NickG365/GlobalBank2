@@ -99,11 +99,10 @@ public class GlobalBank extends JavaPlugin {
 	                         String commandLabel, String[] args) {
 		if (commandLabel.equalsIgnoreCase("gb") && sender instanceof Player) {
 			if (args.length > 0) {
-				if (args[0].equalsIgnoreCase("create") && args.length > 1
-						&& sender.hasPermission("gb.create")) {
+				if (args[0].equalsIgnoreCase("create") && args.length > 1 && sender.hasPermission("gb.create")) {
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					NPCEntity t = this.m.spawnNPC("Banker",
-							((Player) sender).getLocation(), args[1]);
+					NPCEntity t = this.m.spawnNPC("Banker",((Player) sender).getLocation(), args[1]);
+					t.lookAtPoint(((Player) sender).getLocation());
 					t.setItemInHand(Material.PAPER);
 //					t.getSpoutPlayer().setSkin(
 //							"http://dl.dropbox.com/u/19653570/bankersskin.png");
