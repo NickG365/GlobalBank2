@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class GlobalBank extends JavaPlugin {
 	public static GlobalBank plugin;
@@ -68,10 +69,9 @@ public class GlobalBank extends JavaPlugin {
 	private void npcSetup() {
 		this.manager = new NPCManager(this);
 		HashMap<Location, String> hm = SqliteDB.getBankers();
-		for (Location l : hm.keySet()) {
-			manager.spawnBankerNPC("Banker", l, hm.get(l));
+		for (Map.Entry<Location, String> entry: hm.entrySet()) {
+			manager.spawnBankerNPC(entry.getValue(), entry.getKey(), entry.getValue());
 		}
-
 	}
 
 	public void onDisable() {
@@ -95,8 +95,14 @@ public class GlobalBank extends JavaPlugin {
 		if (commandLabel.equalsIgnoreCase("gb") && sender instanceof Player) {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1 && sender.hasPermission("gb.create")) {
+					if(args[1].length() > 16) {
+						sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
+								+ ChatColor.WHITE + "Bank names must be no longer than 16 letters");
+						return true;
+					}
+
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					manager.spawnBankerNPC("Banker", ((Player) sender).getLocation(), args[1]);
+					manager.spawnBankerNPC(args[1], ((Player) sender).getLocation(), args[1]);
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
