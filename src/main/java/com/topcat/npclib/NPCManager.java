@@ -1,12 +1,10 @@
 package com.topcat.npclib;
 
-import com.topcat.npclib.entity.HumanNPC;
-import com.topcat.npclib.entity.NPC;
+import com.topcat.npclib.entity.Banker;
 import com.topcat.npclib.nms.BServer;
 import com.topcat.npclib.nms.BWorld;
 import com.topcat.npclib.nms.NPCEntity;
 import com.topcat.npclib.nms.NPCNetworkManager;
-import com.topcat.npclib.entity.BankerNPC;
 import net.minecraft.server.Entity;
 import net.minecraft.server.ItemInWorldManager;
 import net.minecraft.server.WorldServer;
@@ -31,7 +29,7 @@ import java.util.logging.Level;
  */
 public class NPCManager {
 
-	private HashMap<String, NPC> npcs = new HashMap<String, NPC>();
+	private HashMap<String, Banker> bankers = new HashMap<String, Banker>();
 	private BServer server;
 	private int taskid;
 	private Map<World, BWorld> bworlds = new HashMap<World, BWorld>();
@@ -46,15 +44,15 @@ public class NPCManager {
 		taskid = Bukkit.getServer().getScheduler().scheduleSyncRepeatingTask(plugin, new Runnable() {
 			public void run() {
 				HashSet<String> toRemove = new HashSet<String>();
-				for (String i : npcs.keySet()) {
-					Entity j = npcs.get(i).getEntity();
+				for (String i : bankers.keySet()) {
+					Entity j = bankers.get(i).getEntity();
 					j.aA();
 					if (j.dead) {
 						toRemove.add(i);
 					}
 				}
 				for (String n : toRemove) {
-					npcs.remove(n);
+					bankers.remove(n);
 				}
 			}
 		}, 1L, 1L);
@@ -87,29 +85,30 @@ public class NPCManager {
 		@SuppressWarnings("unused")
 		@EventHandler
 		public void onChunkLoad(ChunkLoadEvent event) {
-			for (NPC npc : npcs.values()) {
-				if (npc != null && event.getChunk() == npc.getBukkitEntity().getLocation().getBlock().getChunk()) {
+			for (Banker banker : bankers.values()) {
+				if (banker != null && event.getChunk() == banker.getBukkitEntity().getLocation().getBlock().getChunk()) {
 					BWorld world = getBWorld(event.getWorld());
-					world.getWorldServer().addEntity(npc.getEntity());
+					world.getWorldServer().addEntity(banker.getEntity());
 				}
 			}
 		}
 	}
 
-	public BankerNPC spawnBankerNPC(String name, Location l, String bankName) {
+	public Banker spawnBanker(Location l, String bankName) {
+		String name = "Banker";
 		int i = 0;
 		String id = name;
-		while (npcs.containsKey(id)) {
+		while (bankers.containsKey(id)) {
 			id = name + i;
 			i++;
 		}
-		return spawnBankerNPC(name, l, id, bankName);
+		return spawnBanker(id, l, id, bankName);
 	}
 
-	public BankerNPC spawnBankerNPC(String name, Location l, String id, String bankName) {
-		if (npcs.containsKey(id)) {
+	public Banker spawnBanker(String name, Location l, String id, String bankName) {
+		if (bankers.containsKey(id)) {
 			server.getLogger().log(Level.WARNING, "NPC with that id already exists, existing NPC returned");
-			return (BankerNPC) npcs.get(id);
+			return bankers.get(id);
 		} else {
 			if (name.length() > 16) { // Check and nag if name is too long, spawn NPC anyway with shortened name.
 				String tmp = name.substring(0, 16);
@@ -121,16 +120,16 @@ public class NPCManager {
 			NPCEntity npcEntity = new NPCEntity(this, world, name, new ItemInWorldManager(world.getWorldServer()));
 			npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
 			world.getWorldServer().addEntity(npcEntity); //the right way
-			BankerNPC npc = new BankerNPC(npcEntity, bankName);
-			npcs.put(id, npc);
+			Banker npc = new Banker(npcEntity, bankName);
+			bankers.put(id, npc);
 			return npc;
 		}
 	}
 
 	public void despawnById(String id) {
-		NPC npc = npcs.get(id);
+		Banker npc = bankers.get(id);
 		if (npc != null) {
-			npcs.remove(id);
+			bankers.remove(id);
 			npc.removeFromWorld();
 		}
 	}
@@ -140,58 +139,55 @@ public class NPCManager {
 			npcName = npcName.substring(0, 16); //Ensure you can still despawn
 		}
 		HashSet<String> toRemove = new HashSet<String>();
-		for (String n : npcs.keySet()) {
-			NPC npc = npcs.get(n);
-			if (npc instanceof HumanNPC) {
-				if (npc != null && ((HumanNPC) npc).getName().equals(npcName)) {
-					toRemove.add(n);
-					npc.removeFromWorld();
-				}
+		for (String n : bankers.keySet()) {
+			Banker npc = bankers.get(n);
+
+			if (npc != null && npc.getName().equals(npcName)) {
+				toRemove.add(n);
+				npc.removeFromWorld();
 			}
 		}
 		for (String n : toRemove) {
-			npcs.remove(n);
+			bankers.remove(n);
 		}
 	}
 
 	public void despawnAll() {
-		for (NPC npc : npcs.values()) {
+		for (Banker npc : bankers.values()) {
 			if (npc != null) {
 				npc.removeFromWorld();
 			}
 		}
-		npcs.clear();
+		bankers.clear();
 	}
 
-	public NPC getNPC(String id) {
-		return npcs.get(id);
+	public Banker getBanker(String id) {
+		return bankers.get(id);
 	}
 
 	public boolean isNPC(org.bukkit.entity.Entity e) {
 		return ((CraftEntity) e).getHandle() instanceof NPCEntity;
 	}
 
-	public List<NPC> getHumanNPCByName(String name) {
-		List<NPC> ret = new ArrayList<NPC>();
-		Collection<NPC> i = npcs.values();
-		for (NPC e : i) {
-			if (e instanceof HumanNPC) {
-				if (((HumanNPC) e).getName().equalsIgnoreCase(name)) {
+	public List<Banker> getHumanNPCByName(String name) {
+		List<Banker> ret = new ArrayList<Banker>();
+		Collection<Banker> i = bankers.values();
+		for (Banker e : i) {
+				if (e.getName().equalsIgnoreCase(name)) {
 					ret.add(e);
 				}
-			}
 		}
 		return ret;
 	}
 
-	public List<NPC> getNPCs() {
-		return new ArrayList<NPC>(npcs.values());
+	public List<Banker> getBankers() {
+		return new ArrayList<Banker>(bankers.values());
 	}
 
 	public String getNPCIdFromEntity(org.bukkit.entity.Entity e) {
 		if (e instanceof HumanEntity) {
-			for (String i : npcs.keySet()) {
-				if (npcs.get(i).getBukkitEntity().getEntityId() == ((HumanEntity) e).getEntityId()) {
+			for (String i : bankers.keySet()) {
+				if (bankers.get(i).getBukkitEntity().getEntityId() == ((HumanEntity) e).getEntityId()) {
 					return i;
 				}
 			}
@@ -206,7 +202,7 @@ public class NPCManager {
 			server.getLogger().log(Level.WARNING, name + " has been shortened to " + tmp);
 			name = tmp;
 		}
-		HumanNPC npc = (HumanNPC) getNPC(id);
+		Banker npc = getBanker(id);
 		npc.setName(name);
 		BWorld b = getBWorld(npc.getBukkitEntity().getLocation().getWorld());
 		WorldServer s = b.getWorldServer();

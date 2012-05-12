@@ -1,6 +1,5 @@
 package net.ark3l.globalbank2.listeners;
 
-import com.topcat.npclib.entity.BankerNPC;
 import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.PlayerState;
 import net.ark3l.globalbank2.methods.SimpleMethods;
@@ -37,7 +36,7 @@ public class BPlayerListener implements Listener {
 					+ ChatColor.WHITE
 					+ " Welcome to "
 					+ ChatColor.GOLD
-					+ ((BankerNPC)b.manager.getNPC(b.manager.getNPCIdFromEntity(e.getRightClicked()))).bankName
+					+ (b.manager.getBanker(b.manager.getNPCIdFromEntity(e.getRightClicked()))).bankName
 					+ ".");
 		}
 	}

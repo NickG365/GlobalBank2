@@ -1,15 +1,12 @@
 package com.topcat.npclib.nms;
 
+import com.topcat.npclib.NPCManager;
 import net.minecraft.server.Entity;
 import net.minecraft.server.EntityHuman;
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.ItemInWorldManager;
-import net.minecraft.server.WorldServer;
-
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.event.entity.EntityTargetEvent;
-
-import com.topcat.npclib.NPCManager;
 
 /**
  *
@@ -39,7 +36,7 @@ public class NPCEntity extends EntityPlayer {
 	@Override
 	public boolean b(EntityHuman entity) {
 		EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.NPC_RIGHTCLICKED);
-		CraftServer server = ((WorldServer) world).getServer();
+		CraftServer server = world.getServer();
 		server.getPluginManager().callEvent(event);
 
 		return super.b(entity);
@@ -49,7 +46,7 @@ public class NPCEntity extends EntityPlayer {
 	public void a_(EntityHuman entity) {
 		if (lastTargetId == -1 || lastTargetId != entity.id) {
 			EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.CLOSEST_PLAYER);
-			CraftServer server = ((WorldServer) world).getServer();
+			CraftServer server = world.getServer();
 			server.getPluginManager().callEvent(event);
 		}
 		lastTargetId = entity.id;
@@ -61,7 +58,7 @@ public class NPCEntity extends EntityPlayer {
 	public void c(Entity entity) {
 		if (lastBounceId != entity.id || System.currentTimeMillis() - lastBounceTick > 1000) {
 			EntityTargetEvent event = new NpcEntityTargetEvent(getBukkitEntity(), entity.getBukkitEntity(), NpcEntityTargetEvent.NpcTargetReason.NPC_BOUNCED);
-			CraftServer server = ((WorldServer) world).getServer();
+			CraftServer server = world.getServer();
 			server.getPluginManager().callEvent(event);
 
 			lastBounceTick = System.currentTimeMillis();

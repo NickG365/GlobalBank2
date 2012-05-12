@@ -70,7 +70,7 @@ public class GlobalBank extends JavaPlugin {
 		this.manager = new NPCManager(this);
 		HashMap<Location, String> hm = SqliteDB.getBankers();
 		for (Map.Entry<Location, String> entry: hm.entrySet()) {
-			manager.spawnBankerNPC(entry.getValue(), entry.getKey(), entry.getValue());
+			manager.spawnBanker(entry.getKey(), entry.getValue());
 		}
 	}
 
@@ -101,7 +101,7 @@ public class GlobalBank extends JavaPlugin {
 						return true;
 					}
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					manager.spawnBankerNPC(args[1], ((Player) sender).getLocation(), args[1]);
+					manager.spawnBanker(((Player) sender).getLocation(), args[1]);
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
