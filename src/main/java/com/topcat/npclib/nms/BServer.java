@@ -1,4 +1,4 @@
-package org.martin.bukkit.npclib;
+package com.topcat.npclib.nms;
 
 import jline.ConsoleReader;
 import net.minecraft.server.*;
@@ -26,7 +26,6 @@ public class BServer {
 	private HashMap<String, BWorld> worlds = new HashMap<String, BWorld>();
 
 	private BServer() {
-		// Getting needed structures
 		server = Bukkit.getServer();
 		try {
 			cServer = (CraftServer) server;
@@ -34,19 +33,6 @@ public class BServer {
 		} catch (Exception ex) {
 			Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
 		}
-		// end
-	}
-
-	private BServer(Server server) {
-		// Getting needed structures
-		this.server = server;
-		try {
-			cServer = (CraftServer) server;
-			mcServer = cServer.getServer();
-		} catch (Exception ex) {
-			Logger.getLogger("Minecraft").log(Level.SEVERE, null, ex);
-		}
-		// end
 	}
 
 	public void disablePlugins() {
@@ -119,14 +105,8 @@ public class BServer {
 		return ins;
 	}
 
-	public static BServer getInstance(Server pl) {
-		if (ins == null) {
-			ins = new BServer(pl);
-		}
-		return ins;
-	}
-
 	public MinecraftServer getMCServer() {
 		return mcServer;
 	}
+
 }

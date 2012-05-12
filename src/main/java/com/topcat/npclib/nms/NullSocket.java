@@ -1,4 +1,4 @@
-package org.martin.bukkit.npclib;
+package com.topcat.npclib.nms;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -7,13 +7,14 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 /**
+ *
  * @author martin
  */
 public class NullSocket extends Socket {
 
 	@Override
 	public InputStream getInputStream() {
-		byte[] buf = new byte[1];
+		byte[] buf = new byte[5];
 		return new ByteArrayInputStream(buf);
 	}
 
@@ -21,4 +22,5 @@ public class NullSocket extends Socket {
 	public OutputStream getOutputStream() {
 		return new ByteArrayOutputStream();
 	}
+
 }

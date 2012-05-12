@@ -1,5 +1,6 @@
 package net.ark3l.globalbank2;
 
+import com.topcat.npclib.NPCManager;
 import net.ark3l.globalbank2.listeners.BEntityListener;
 import net.ark3l.globalbank2.listeners.BInventoryListener;
 import net.ark3l.globalbank2.listeners.BPlayerListener;
@@ -10,7 +11,6 @@ import net.ark3l.globalbank2.util.SqliteDB;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -18,8 +18,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.martin.bukkit.npclib.NPCEntity;
-import org.martin.bukkit.npclib.NPCManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -71,10 +69,7 @@ public class GlobalBank extends JavaPlugin {
 		this.m = new NPCManager(this);
 		HashMap<Location, String> hm = SqliteDB.getBankers();
 		for (Location l : hm.keySet()) {
-			NPCEntity t = m.spawnNPC("Banker", l, hm.get(l));
-			t.setItemInHand(Material.PAPER);
-//			t.getSpoutPlayer().setSkin(
-//					"http://dl.dropbox.com/u/19653570/bankersskin.png");
+			m.spawnBankerNPC("Banker", l, hm.get(l));
 		}
 
 	}
@@ -101,9 +96,7 @@ public class GlobalBank extends JavaPlugin {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1 && sender.hasPermission("gb.create")) {
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					NPCEntity t = this.m.spawnNPC("Banker",((Player) sender).getLocation(), args[1]);
-					t.lookAtPoint(((Player) sender).getLocation());
-					t.setItemInHand(Material.PAPER);
+					m.spawnBankerNPC("Banker", ((Player) sender).getLocation(), args[1]);
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");

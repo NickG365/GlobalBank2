@@ -1,5 +1,6 @@
 package net.ark3l.globalbank2.listeners;
 
+import com.topcat.npclib.entity.BankerNPC;
 import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.util.SqliteDB;
 import org.bukkit.ChatColor;
@@ -28,9 +29,9 @@ public class BEntityListener implements Listener {
 			if (event instanceof EntityDamageByEntityEvent) {
 				if (b.punchers.contains(((EntityDamageByEntityEvent) event)
 						.getDamager())) {
-					SqliteDB.delBanker(b.m.getNPC(b.m.getNPCIdFromEntity(event
-							.getEntity())).BankName);
-					b.m.despawnById(b.m.getNPCIdFromEntity(event.getEntity()));
+					BankerNPC banker = (BankerNPC) b.m.getNPC(b.m.getNPCIdFromEntity(event.getEntity()));
+					SqliteDB.delBanker(banker.bankName);
+					b.m.despawnById(b.m.getNPCIdFromEntity(banker.getBukkitEntity()));
 					((Player) ((EntityDamageByEntityEvent) event).getDamager())
 							.sendMessage(ChatColor.BLUE + "[GlobalBank]"
 									+ ChatColor.WHITE

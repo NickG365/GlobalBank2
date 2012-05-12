@@ -1,19 +1,24 @@
-package org.martin.bukkit.npclib;
+package com.topcat.npclib.nms;
+
+import java.lang.reflect.Field;
 
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.NetworkManager;
 import net.minecraft.server.Packet;
 
-import java.lang.reflect.Field;
-import java.net.Socket;
-
 /**
+ *
  * @author martin
  */
 public class NPCNetworkManager extends NetworkManager {
 
-	public NPCNetworkManager(Socket socket, String s, NetHandler nethandler) {
-		super(socket, s, nethandler);
+	public NPCNetworkManager() {
+		super(new NullSocket(), "NPC Manager", new NetHandler() {
+			@Override
+			public boolean c() {
+				return true;
+			}
+		});
 		try {
 			Field f = NetworkManager.class.getDeclaredField("l");
 			f.setAccessible(true);
@@ -38,4 +43,5 @@ public class NPCNetworkManager extends NetworkManager {
 	@Override
 	public void a() {
 	}
+
 }
