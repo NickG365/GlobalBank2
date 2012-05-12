@@ -14,7 +14,7 @@ import org.bukkit.event.entity.EntityTargetEvent;
 
 @SuppressWarnings("deprecation")
 public class BEntityListener implements Listener {
-	public GlobalBank b;
+	public final GlobalBank b;
 
 	public BEntityListener(GlobalBank b) {
 		this.b = b;

@@ -13,7 +13,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 
 @SuppressWarnings("deprecation")
 public class BPlayerListener implements Listener {
-	private GlobalBank b;
+	private final GlobalBank b;
 
 	public BPlayerListener(GlobalBank b) {
 		this.b = b;

@@ -27,21 +27,23 @@ import java.util.Map;
 
 public class GlobalBank extends JavaPlugin {
 	public static GlobalBank plugin;
-	public BPlayerListener playerListener = new BPlayerListener(this);
-	public BEntityListener entityListener = new BEntityListener(this);
-	public BInventoryListener inventoryListener;
-	public NPCManager manager = null;
-	public Settings settings = new Settings(this);
-	public HashMap<Player, ArrayList<ItemStack>> isk = new HashMap<Player, ArrayList<ItemStack>>();
-	public HashMap<Player, Bankventory> bankventories = new HashMap<Player, Bankventory>();
-	public ArrayList<Player> punchers = new ArrayList<Player>();
-	public Sort sort = new Sort();
+
+	public final BPlayerListener playerListener = new BPlayerListener(this);
+	public final BEntityListener entityListener = new BEntityListener(this);
+	public final BInventoryListener inventoryListener = new BInventoryListener(this);
+	public final Settings settings = new Settings(this);
+
+	public final HashMap<Player, ArrayList<ItemStack>> isk = new HashMap<Player, ArrayList<ItemStack>>();
+	public final HashMap<Player, Bankventory> bankventories = new HashMap<Player, Bankventory>();
+	public final ArrayList<Player> punchers = new ArrayList<Player>();
+	public final Sort sort = new Sort();
+
 	public Economy economy = null;
+	public NPCManager manager = null;
 
 	public void onEnable() {
 		plugin = this;
 		manager = new NPCManager(this);
-		inventoryListener = new BInventoryListener(this);
 
 		setupConfig();
 		Log.info("Loaded settings");

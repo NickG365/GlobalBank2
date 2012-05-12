@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class Bankventory implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private HashMap<Integer, BItemStack[]> slots = new HashMap<Integer, BItemStack[]>();
+	private final HashMap<Integer, BItemStack[]> slots = new HashMap<Integer, BItemStack[]>();
 	private ArrayList<Integer> slotIds = new ArrayList<Integer>();
 
 	public Bankventory() {

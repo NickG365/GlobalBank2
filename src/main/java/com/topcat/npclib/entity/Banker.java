@@ -9,13 +9,13 @@ import org.bukkit.inventory.ItemStack;
 
 public class Banker {
 
-	public String bankName;
-	private Entity entity;
+	public final String bankName;
+	private final Entity entity;
 
 	public Banker(Entity entity, String bankName) {
 		this.entity = entity;
-		setItemInHand(Material.PAPER);
 		this.bankName = bankName;
+		setItemInHand(Material.PAPER);
 	}
 
 

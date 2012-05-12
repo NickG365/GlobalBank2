@@ -5,7 +5,6 @@ import java.util.logging.Logger;
 public class Log {
 
 	private static final Logger log = Logger.getLogger("Minecraft");
-	public static boolean verbose = false;
 
 	public static void info(String msg) {
 		log.info("[GlobalBank2] " + msg);

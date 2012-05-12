@@ -187,7 +187,7 @@ public class NPCManager {
 	public String getNPCIdFromEntity(org.bukkit.entity.Entity e) {
 		if (e instanceof HumanEntity) {
 			for (String i : bankers.keySet()) {
-				if (bankers.get(i).getBukkitEntity().getEntityId() == ((HumanEntity) e).getEntityId()) {
+				if (bankers.get(i).getBukkitEntity().getEntityId() == e.getEntityId()) {
 					return i;
 				}
 			}

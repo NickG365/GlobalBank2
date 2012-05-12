@@ -13,7 +13,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 
 public class BInventoryListener implements Listener {
-	private GlobalBank b;
+	private final GlobalBank b;
 
 	public BInventoryListener(GlobalBank b) {
 		this.b = b;
