@@ -27,7 +27,7 @@ public class BPlayerListener implements Listener {
 				p.sendMessage(ChatColor.BLUE
 						+ "[B]"
 						+ ChatColor.RED
-						+ " You do not have permission to use the GlobalBank.");
+						+ " You do not have permission to use the banks");
 				return;
 			}
 			SimpleMethods.openBank(b, p);

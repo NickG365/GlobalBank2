@@ -40,15 +40,19 @@ public class GlobalBank extends JavaPlugin {
 
 	public void onEnable() {
 		plugin = this;
-		this.setupConfig();
-		this.manager = new NPCManager(this);
-		this.inventoryListener = new BInventoryListener(this);
-		this.registerListeners();
-		this.setupData();
-		this.npcSetup();
-		if (getServer().getPluginManager().getPlugin("Vault") != null
-				&& settings.useEconomy) {
+		manager = new NPCManager(this);
+		inventoryListener = new BInventoryListener(this);
+
+		setupConfig();
+		Log.info("Loaded settings");
+		setupData();
+		Log.info("Loaded SQLite database");
+		npcSetup();
+		Log.info("Loaded NPCs");
+
+		if (getServer().getPluginManager().getPlugin("Vault") != null && settings.useEconomy) {
 			setupEconomy();
+			Log.info("Economy enabled");
 		}
 
 		try {
@@ -57,6 +61,8 @@ public class GlobalBank extends JavaPlugin {
 		} catch (IOException e1) {
 			Log.warning("Error submitting usage statistics");
 		}
+
+		registerListeners();
 
 		Log.info(this + " enabled!");
 	}
@@ -75,8 +81,8 @@ public class GlobalBank extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		Log.info(this + " disabled!");
 		manager.despawnAll();
+		Log.info(this + " disabled!");
 	}
 
 	private Boolean setupEconomy() {
