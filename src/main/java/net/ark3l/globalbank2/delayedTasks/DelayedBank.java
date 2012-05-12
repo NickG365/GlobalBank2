@@ -23,13 +23,17 @@ public class DelayedBank implements Runnable {
 
 	public void run() {
 		b.removeContents(p);
-		ItemStack[] content = new ItemStack[maxSlots];
+		ItemStack[] content = new ItemStack[54];
 		ArrayList<ItemStack> iss = new ArrayList<ItemStack>();
 		for (int i = 0; (i < content.length); i++) {
-			ItemStack is = new ItemStack(Material.CHEST, i + 1);
+			ItemStack is;
+			if(i < maxSlots) // fill with chests only up to the max slots for the player
+		        is = new ItemStack(Material.CHEST, i + 1);
+			else
+				is = new ItemStack(Material.STONE);
+
 			content[i] = is;
 			iss.add(is);
-
 		}
 		b.isk.put(p, iss);
 		String s = p.getName();

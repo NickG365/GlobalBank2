@@ -40,6 +40,8 @@ public class BInventoryListener implements Listener {
 				if (e.getCurrentItem().getType() == Material.CHEST) {
 					// player has selected a slot in the slot selection screen
 					e.setCancelled(SimpleMethods.handleBank(b, p, e.getSlot()));
+				} else {
+					e.setCancelled(true);
 				}
 			} else if (ps.equals(PlayerStatus.SLOT)) {
 				// player has done something inside the slot
