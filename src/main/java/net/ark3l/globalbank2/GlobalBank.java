@@ -103,13 +103,16 @@ public class GlobalBank extends JavaPlugin {
 		if (commandLabel.equalsIgnoreCase("gb") && sender instanceof Player) {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1 && sender.hasPermission("gb.create")) {
+					// strip the pitch and yaw off of the location so the NPC isn't funneh
+					Location location = ((Player) sender).getLocation().clone();
+					location.setPitch(0); location.setYaw(0);
 					if(args[1].length() > 16) {
 						sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 								+ ChatColor.WHITE + "Bank names must be no longer than 16 letters");
 						return true;
 					}
-					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					manager.spawnBanker(((Player) sender).getLocation(), args[1]);
+					SqliteDB.newBanker(args[1], location);
+					manager.spawnBanker(location, args[1]);
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
