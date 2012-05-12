@@ -33,7 +33,7 @@ public class BEntityListener implements Listener {
 					SqliteDB.delBanker(banker.bankName);
 					b.manager.despawnById(b.manager.getNPCIdFromEntity(banker.getBukkitEntity()));
 					((Player) ((EntityDamageByEntityEvent) event).getDamager())
-							.sendMessage(ChatColor.BLUE + "[GlobalBank]"
+							.sendMessage(ChatColor.BLUE + "[GlobalBank2]"
 									+ ChatColor.WHITE
 									+ " Banker has been removed.");
 					b.punchers.remove(((EntityDamageByEntityEvent) event)
