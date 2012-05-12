@@ -95,7 +95,7 @@ public class NPCManager {
 	}
 
 	public Banker spawnBanker(Location l, String bankName) {
-		String name = "Banker";
+		String name = "Banker ";
 		int i = 0;
 		String id = name;
 		while (bankers.containsKey(id)) {

@@ -15,13 +15,11 @@ import org.bukkit.inventory.ItemStack;
 public class SimpleMethods {
 
 	public static void openSlot(GlobalBank b, Player p, int i) {
-		b.getServer().getScheduler()
-				.scheduleSyncDelayedTask(b, new DelayedSlot(p, i, b), 1);
+		b.getServer().getScheduler().scheduleSyncDelayedTask(b, new DelayedSlot(p, i, b), 1);
 	}
 
 	public static void openBank(GlobalBank b, Player p) {
-		b.getServer().getScheduler()
-				.scheduleSyncDelayedTask(b, new DelayedBank(p, b, getMaxSlotsForPlayer(p)), 1);
+		b.getServer().getScheduler().scheduleSyncDelayedTask(b, new DelayedBank(p, b, getMaxSlotsForPlayer(p)), 1);
 	}
 
 	public static boolean handleSlot(ItemStack i, Player p, Inventory inv,
