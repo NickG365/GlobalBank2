@@ -100,7 +100,6 @@ public class GlobalBank extends JavaPlugin {
 								+ ChatColor.WHITE + "Bank names must be no longer than 16 letters");
 						return true;
 					}
-
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
 					manager.spawnBankerNPC(args[1], ((Player) sender).getLocation(), args[1]);
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
