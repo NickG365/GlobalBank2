@@ -26,11 +26,11 @@ import java.util.HashMap;
 
 public class GlobalBank extends JavaPlugin {
 	public static GlobalBank plugin;
-	public BPlayerListener p = new BPlayerListener(this);
-	public BEntityListener e = new BEntityListener(this);
-	public BInventoryListener i;
-	public NPCManager m = null;
-	public Settings s = new Settings(this);
+	public BPlayerListener playerListener = new BPlayerListener(this);
+	public BEntityListener entityListener = new BEntityListener(this);
+	public BInventoryListener inventoryListener;
+	public NPCManager manager = null;
+	public Settings settings = new Settings(this);
 	public HashMap<Player, ArrayList<ItemStack>> isk = new HashMap<Player, ArrayList<ItemStack>>();
 	public HashMap<Player, Bankventory> bankventories = new HashMap<Player, Bankventory>();
 	public ArrayList<Player> punchers = new ArrayList<Player>();
@@ -40,13 +40,13 @@ public class GlobalBank extends JavaPlugin {
 	public void onEnable() {
 		plugin = this;
 		this.setupConfig();
-		this.m = new NPCManager(this);
-		this.i = new BInventoryListener(this);
+		this.manager = new NPCManager(this);
+		this.inventoryListener = new BInventoryListener(this);
 		this.registerListeners();
 		this.setupData();
 		this.npcSetup();
 		if (getServer().getPluginManager().getPlugin("Vault") != null
-				&& s.useEconomy) {
+				&& settings.useEconomy) {
 			setupEconomy();
 		}
 
@@ -61,22 +61,22 @@ public class GlobalBank extends JavaPlugin {
 	}
 
 	private void setupConfig() {
-		s.loadSettings();
-		s.getSettings();
+		settings.loadSettings();
+		settings.getSettings();
 	}
 
 	private void npcSetup() {
-		this.m = new NPCManager(this);
+		this.manager = new NPCManager(this);
 		HashMap<Location, String> hm = SqliteDB.getBankers();
 		for (Location l : hm.keySet()) {
-			m.spawnBankerNPC("Banker", l, hm.get(l));
+			manager.spawnBankerNPC("Banker", l, hm.get(l));
 		}
 
 	}
 
 	public void onDisable() {
 		Log.info(this + " disabled!");
-		m.despawnAll();
+		manager.despawnAll();
 	}
 
 	private Boolean setupEconomy() {
@@ -96,26 +96,23 @@ public class GlobalBank extends JavaPlugin {
 			if (args.length > 0) {
 				if (args[0].equalsIgnoreCase("create") && args.length > 1 && sender.hasPermission("gb.create")) {
 					SqliteDB.newBanker(args[1], ((Player) sender).getLocation());
-					m.spawnBankerNPC("Banker", ((Player) sender).getLocation(), args[1]);
-					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
+					manager.spawnBankerNPC("Banker", ((Player) sender).getLocation(), args[1]);
+					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
 				} else if (args[0].equalsIgnoreCase("delete") && sender.hasPermission("gb.delete")) {
-					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
+					sender.sendMessage(ChatColor.BLUE + "[GlobalBank2] "
 							+ ChatColor.WHITE
 							+ "Please punch a Banker to remove them.");
 					this.punchers.add((Player) sender);
 				} else {
 					sender.sendMessage(ChatColor.BLUE
-							+ "[GlobalBank] "
+							+ "[GlobalBank2] "
 							+ ChatColor.WHITE
 							+ " You do not have permission to use this command or it was poorly formatted.");
 				}
 			} else {
-				sender.sendMessage(ChatColor.BLUE + "[GlobalBank]"
-						+ ChatColor.WHITE + " v."
-						+ this.getDescription().getVersion() + " by "
-						+ ChatColor.GOLD + "Samkio" + ChatColor.WHITE + ".");
+				sender.sendMessage(ChatColor.BLUE + this.toString());
 			}
 			return true;
 		} else {
@@ -131,9 +128,9 @@ public class GlobalBank extends JavaPlugin {
 
 	private void registerListeners() {
 		PluginManager pm = this.getServer().getPluginManager();
-		pm.registerEvents(p, this);
-		pm.registerEvents(i, this);
-		pm.registerEvents(e, this);
+		pm.registerEvents(playerListener, this);
+		pm.registerEvents(inventoryListener, this);
+		pm.registerEvents(entityListener, this);
 	}
 
 	private void setupData() {

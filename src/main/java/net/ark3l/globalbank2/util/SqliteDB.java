@@ -84,7 +84,7 @@ public class SqliteDB {
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
-			st.executeUpdate("DELETE FROM NPCLocations WHERE bankname='"
+			st.executeUpdate("DELETE FROM NPCLocations WHERE bankName='"
 					+ bankname + "'");
 			conn.commit();
 		} catch (SQLException e) {
@@ -105,7 +105,7 @@ public class SqliteDB {
 			st = conn.createStatement();
 			ResultSet rs = st.executeQuery("SELECT * FROM NPCLocations");
 			while (rs.next()) {
-				npcs.put(MiscMethods.locFromString(rs.getString("loc")), rs.getString("bankname"));
+				npcs.put(MiscMethods.locFromString(rs.getString("loc")), rs.getString("bankName"));
 			}
 			conn.commit();
 		} catch (SQLException e) {

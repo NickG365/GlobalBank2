@@ -55,7 +55,7 @@ public class SimpleMethods {
 			return true;
 		}
 		Bankventory ba = MiscMethods.getAccount(p);
-		for (int z = 1; z <= (b.s.startWithSlots); z++) {
+		for (int z = 1; z <= (b.settings.startWithSlots); z++) {
 			ba.getSlotIds().add(z);
 		}
 		if (ba.getSlotIds().contains((slot + 1))) {
@@ -88,6 +88,6 @@ public class SimpleMethods {
 	}
 
 	public static double costOfSlot(int slot) {
-		return (GlobalBank.plugin.s.costPerSlot * (GlobalBank.plugin.s.multiplier * (slot - GlobalBank.plugin.s.startWithSlots)));
+		return (GlobalBank.plugin.settings.costPerSlot * (GlobalBank.plugin.settings.multiplier * (slot - GlobalBank.plugin.settings.startWithSlots)));
 	}
 }

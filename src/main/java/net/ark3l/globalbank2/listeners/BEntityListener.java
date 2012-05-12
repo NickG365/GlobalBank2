@@ -25,13 +25,13 @@ public class BEntityListener implements Listener {
 		if (!(event instanceof EntityDamageByEntityEvent)) {
 			return;
 		}
-		if (b.m.isNPC(event.getEntity())) {
+		if (b.manager.isNPC(event.getEntity())) {
 			if (event instanceof EntityDamageByEntityEvent) {
 				if (b.punchers.contains(((EntityDamageByEntityEvent) event)
 						.getDamager())) {
-					BankerNPC banker = (BankerNPC) b.m.getNPC(b.m.getNPCIdFromEntity(event.getEntity()));
+					BankerNPC banker = (BankerNPC) b.manager.getNPC(b.manager.getNPCIdFromEntity(event.getEntity()));
 					SqliteDB.delBanker(banker.bankName);
-					b.m.despawnById(b.m.getNPCIdFromEntity(banker.getBukkitEntity()));
+					b.manager.despawnById(b.manager.getNPCIdFromEntity(banker.getBukkitEntity()));
 					((Player) ((EntityDamageByEntityEvent) event).getDamager())
 							.sendMessage(ChatColor.BLUE + "[GlobalBank]"
 									+ ChatColor.WHITE
@@ -49,7 +49,7 @@ public class BEntityListener implements Listener {
 	public void onEntityTarget(EntityTargetEvent event) {
 		if (event.getTarget() == null)
 			return;
-		if (b.m.isNPC(event.getTarget())) {
+		if (b.manager.isNPC(event.getTarget())) {
 			event.setCancelled(true);
 		}
 

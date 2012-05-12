@@ -22,7 +22,7 @@ public class BPlayerListener implements Listener {
 
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onPlayerInteractEntity(PlayerInteractEntityEvent e) {
-		if (b.m.isNPC(e.getRightClicked())) {
+		if (b.manager.isNPC(e.getRightClicked())) {
 			Player p = e.getPlayer();
 			if (!p.hasPermission("gb.use")) {
 				p.sendMessage(ChatColor.BLUE
@@ -37,7 +37,7 @@ public class BPlayerListener implements Listener {
 					+ ChatColor.WHITE
 					+ " Welcome to "
 					+ ChatColor.GOLD
-					+ ((BankerNPC)b.m.getNPC(b.m.getNPCIdFromEntity(e.getRightClicked()))).bankName
+					+ ((BankerNPC)b.manager.getNPC(b.manager.getNPCIdFromEntity(e.getRightClicked()))).bankName
 					+ ".");
 		}
 	}
