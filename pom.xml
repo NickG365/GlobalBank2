@@ -6,7 +6,7 @@
 
     <groupId>net.ark3l</groupId>
     <artifactId>GlobalBank2</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <name>GlobalBank2</name>
     <url>http://www.github.com/Arkel/GlobalBank2</url>
     <description>GUI based banking</description>
