@@ -29,8 +29,8 @@ public class BInventoryListener implements Listener {
 	@EventHandler(priority = EventPriority.NORMAL)
 	public void onInventoryClick(InventoryClickEvent e) {
 		if (!(e.getWhoClicked() instanceof Player)) return;
-		PlayerStatus ps = PlayerState.getPlayerState((Player) e.getWhoClicked()).getPs();
 		Player p = ((Player) e.getWhoClicked());
+		PlayerStatus ps = PlayerState.getPlayerState(p).getPs();
 		if (e.getCurrentItem() == null)
 			return;
 		if (!b.isk.containsKey(p))
@@ -38,9 +38,11 @@ public class BInventoryListener implements Listener {
 		if (b.isk.get(p).contains(e.getCurrentItem())) {
 			if (ps.equals(PlayerStatus.CHEST_SELECT)) {
 				if (e.getCurrentItem().getType() == Material.CHEST) {
+					// player has selected a slot in the slot selection screen
 					e.setCancelled(SimpleMethods.handleBank(b, p, e.getSlot()));
 				}
 			} else if (ps.equals(PlayerStatus.SLOT)) {
+				// player has done something inside the slot
 				e.setCancelled(SimpleMethods.handleSlot(e.getCurrentItem(), p,
 						e.getInventory(), b));
 			}

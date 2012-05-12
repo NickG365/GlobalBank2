@@ -21,7 +21,7 @@ public class SimpleMethods {
 
 	public static void openBank(GlobalBank b, Player p) {
 		b.getServer().getScheduler()
-				.scheduleSyncDelayedTask(b, new DelayedBank(p, b), 1);
+				.scheduleSyncDelayedTask(b, new DelayedBank(p, b, getMaxSlotsForPlayer(p)), 1);
 	}
 
 	public static boolean handleSlot(ItemStack i, Player p, Inventory inv,
@@ -89,5 +89,21 @@ public class SimpleMethods {
 
 	public static double costOfSlot(int slot) {
 		return (GlobalBank.plugin.settings.costPerSlot * (GlobalBank.plugin.settings.multiplier * (slot - GlobalBank.plugin.settings.startWithSlots)));
+	}
+
+	public static int getMaxSlotsForPlayer(Player player) {
+		if(player.hasPermission("gb.slots.54")) {
+			return 54;
+		} else if(player.hasPermission("gb.slots.45")) {
+			return 45;
+		} else if(player.hasPermission("gb.slots.36")) {
+			return 36;
+		} else if(player.hasPermission("gb.slots.27")) {
+			return 27;
+		} else if(player.hasPermission("gb.slots.18")) {
+			return 18;
+		} else {
+			return 9;
+		}
 	}
 }

@@ -13,15 +13,17 @@ import java.util.ArrayList;
 public class DelayedBank implements Runnable {
 	public Player p;
 	public GlobalBank b;
+	public int maxSlots;
 
-	public DelayedBank(Player p, GlobalBank b) {
+	public DelayedBank(Player p, GlobalBank b, int maxSlots) {
 		this.p = p;
 		this.b = b;
+		this.maxSlots = maxSlots;
 	}
 
 	public void run() {
 		b.removeContents(p);
-		ItemStack[] content = new ItemStack[54];
+		ItemStack[] content = new ItemStack[maxSlots];
 		ArrayList<ItemStack> iss = new ArrayList<ItemStack>();
 		for (int i = 0; (i < content.length); i++) {
 			ItemStack is = new ItemStack(Material.CHEST, i + 1);
