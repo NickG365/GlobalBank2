@@ -104,13 +104,10 @@ public class GlobalBank extends JavaPlugin {
 					NPCEntity t = this.m.spawnNPC("Banker",((Player) sender).getLocation(), args[1]);
 					t.lookAtPoint(((Player) sender).getLocation());
 					t.setItemInHand(Material.PAPER);
-//					t.getSpoutPlayer().setSkin(
-//							"http://dl.dropbox.com/u/19653570/bankersskin.png");
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
 							+ ChatColor.WHITE + "Bank: " + ChatColor.GOLD
 							+ args[1] + ChatColor.WHITE + " has been created.");
-				} else if (args[0].equalsIgnoreCase("delete")
-						&& sender.hasPermission("gb.delete")) {
+				} else if (args[0].equalsIgnoreCase("delete") && sender.hasPermission("gb.delete")) {
 					sender.sendMessage(ChatColor.BLUE + "[GlobalBank] "
 							+ ChatColor.WHITE
 							+ "Please punch a Banker to remove them.");
