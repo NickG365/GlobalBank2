@@ -29,16 +29,13 @@ public class InventoryClose implements Runnable {
 				|| entityPlayer.activeContainer == entityPlayer.defaultContainer) {
 			PlayerState.getPlayerState(p).setBuyingSlot(0);
 			if (PlayerState.getPlayerState(p).getPs() == PlayerStatus.SLOT) {
-				//p.getInventory().setContents(Inv.getContents().clone());
 				SlotDataMethods.saveBank(p, Inv.getContents().clone(), slot);
-				p.sendMessage(ChatColor.BLUE + "[B]" + ChatColor.WHITE
-						+ " Thank you " + ChatColor.GOLD + p.getName()
-						+ ChatColor.WHITE + ". Have a Great Day!");
+				p.sendMessage(ChatColor.BLUE + "[B] " + ChatColor.WHITE
+						+ GlobalBank.plugin.settings.getStringValue("Strings.Closed"));
 				PlayerState.getPlayerState(p).setPs(PlayerStatus.DEFAULT);
 			} else if (PlayerState.getPlayerState(p).getPs() == PlayerStatus.CHEST_SELECT) {
-				p.sendMessage(ChatColor.BLUE + "[B]" + ChatColor.WHITE
-						+ " Thank you " + ChatColor.GOLD + p.getName()
-						+ ChatColor.WHITE + ". Have a Great Day!");
+				p.sendMessage(ChatColor.BLUE + "[B] " + ChatColor.WHITE
+						+ GlobalBank.plugin.settings.getStringValue("Strings.Closed"));
 				PlayerState.getPlayerState(p).setPs(PlayerStatus.DEFAULT);
 				GlobalBank.plugin.removeContents(p);
 			}

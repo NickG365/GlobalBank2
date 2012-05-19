@@ -6,11 +6,11 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import java.io.File;
 import java.io.IOException;
 
-public class Settings {
+public class SettingsManager {
 	private GlobalBank m;
 	private YamlConfiguration y;
 
-	public Settings(GlobalBank m) {
+	public SettingsManager(GlobalBank m) {
 		this.m = m;
 	}
 
@@ -22,10 +22,7 @@ public class Settings {
 	public void loadSettings() {
 		File f = new File(m.getDataFolder() + "/Config.yml");
 		this.y = YamlConfiguration.loadConfiguration(f);
-		y.addDefault("Economy.CostPerSlot", 20);
-		y.addDefault("Economy.UseEconomy", true);
-		y.addDefault("Economy.ProgressiveSlotMultiplier", 2);
-		y.addDefault("Slot.BeginWith", 5);
+		y.addDefaults(YamlConfiguration.loadConfiguration(m.getResource("config.yml")));
 		y.options().copyDefaults(true);
 		try {
 			y.save(f);
@@ -48,19 +45,17 @@ public class Settings {
 		return y.get(s, o);
 	}
 
-	public Integer getIntegerValue(String s,
-	                               Integer i) {
+	public Integer getIntegerValue(String s, Integer i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Integer) ? (Integer) o : i;
 	}
 
-	public String getStringValue(String s, String i) {
-		Object o = this.getValue(s, i);
-		return (o instanceof String) ? (String) o : i;
+	public String getStringValue(String s) {
+		Object o = this.getValue(s, "Error");
+		return (o instanceof String) ? (String) o : "Error";
 	}
 
-	public Boolean getBooleanValue(String s,
-	                               Boolean i) {
+	public Boolean getBooleanValue(String s, Boolean i) {
 		Object o = this.getValue(s, i);
 		return (o instanceof Boolean) ? (Boolean) o : i;
 	}

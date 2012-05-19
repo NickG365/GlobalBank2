@@ -31,7 +31,7 @@ public class GlobalBank extends JavaPlugin {
 	public final BPlayerListener playerListener = new BPlayerListener(this);
 	public final BEntityListener entityListener = new BEntityListener(this);
 	public final BInventoryListener inventoryListener = new BInventoryListener(this);
-	public final Settings settings = new Settings(this);
+	public final SettingsManager settings = new SettingsManager(this);
 
 	public final HashMap<Player, ArrayList<ItemStack>> isk = new HashMap<Player, ArrayList<ItemStack>>();
 	public final HashMap<Player, Bankventory> bankventories = new HashMap<Player, Bankventory>();
