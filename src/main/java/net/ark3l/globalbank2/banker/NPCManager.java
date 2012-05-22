@@ -9,6 +9,7 @@ import net.minecraft.server.ItemInWorldManager;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.WorldServer;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.craftbukkit.CraftServer;
@@ -121,7 +122,9 @@ public class NPCManager {
 			Banker npc = new Banker(npcEntity, bankName);
 
 			if(Bukkit.getPluginManager().isPluginEnabled("Spout")) {
-				((SpoutPlayer)npc.getBukkitEntity()).setSkin("http://dl.dropbox.com/u/18216599/images/bankersskin.png");
+				SpoutPlayer sp = npc.getSpoutPlayer();
+				sp.setSkin("http://dl.dropbox.com/u/18216599/images/bankersskin.png");
+				sp.setTitle(ChatColor.GOLD + "Banker\n" + ChatColor.WHITE + "[" + bankName + "]");
 			}
 
 			bankers.put(id, npc);

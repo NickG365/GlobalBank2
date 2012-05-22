@@ -26,4 +26,8 @@ public class NPCEntity extends EntityPlayer {
 		setPosition(arg0, arg1, arg2);
 	}
 
+	public void setBukkitEntity(org.bukkit.entity.Entity entity) {
+		bukkitEntity = entity;
+	}
+
 }

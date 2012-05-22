@@ -1,9 +1,15 @@
 package net.ark3l.globalbank2.banker.entity;
 
+import net.ark3l.globalbank2.banker.nms.NPCEntity;
 import net.minecraft.server.Entity;
+import net.minecraft.server.EntityPlayer;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
+import org.getspout.spout.player.SpoutCraftPlayer;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class Banker {
 
@@ -16,6 +22,20 @@ public class Banker {
 		setItemInHand(Material.PAPER);
 	}
 
+	public SpoutPlayer getSpoutPlayer() {
+		try {
+			Class.forName("org.getspout.spout.Spout");
+
+			if (!(getEntity().getBukkitEntity() instanceof SpoutCraftPlayer)) {
+				((NPCEntity) getEntity()).setBukkitEntity(new SpoutCraftPlayer((CraftServer) Bukkit.getServer(), (EntityPlayer) getEntity()));
+			}
+
+			return (SpoutPlayer) getEntity().getBukkitEntity();
+		} catch (ClassNotFoundException e) {
+			Bukkit.getServer().getLogger().warning("Cannot get spout player without spout installed");
+		}
+		return null;
+	}
 
 	public void setItemInHand(Material m) {
 		setItemInHand(m, (short) 0);
