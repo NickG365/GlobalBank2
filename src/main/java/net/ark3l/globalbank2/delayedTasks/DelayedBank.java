@@ -39,7 +39,7 @@ public class DelayedBank implements Runnable {
 		String s = p.getName();
 		if (p.getName().length() > 11)
 			s = s.substring(0, 10);
-		Inventory inv = b.getServer().createInventory(p, 54);
+		Inventory inv = b.getServer().createInventory(p, 54, s);
 		inv.setContents(content);
 		p.openInventory(inv);
 		//CustomInventory ci = new CustomInventory(content, "Bank:" + s);
