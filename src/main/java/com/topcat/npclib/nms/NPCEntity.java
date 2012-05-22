@@ -27,6 +27,8 @@ public class NPCEntity extends EntityPlayer {
 		lastTargetId = -1;
 		lastBounceId = -1;
 		lastBounceTick = 0;
+		// fake sleeping
+		fauxSleeping = true;
 	}
 
 	public void setBukkitEntity(org.bukkit.entity.Entity entity) {
