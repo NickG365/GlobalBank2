@@ -87,7 +87,7 @@ public class Sort {
 				return -1;
 			} else if (item != null && check == null) {
 				return 1;
-			} else if (item == null && check == null) {
+			} else if (item == null) {
 				return 0;
 			} else if (item.getTypeId() > check.getTypeId()) {
 				return 1;

@@ -32,11 +32,12 @@ import java.util.HashSet;
  */
 public class NPCManager {
 
-	private HashMap<String, Banker> bankers = new HashMap<String, Banker>();
-	private int taskid;
-	private NPCNetworkManager npcNetworkManager;
+	private final HashMap<String, Banker> bankers = new HashMap<String, Banker>();
+	private final int taskid;
+	private final NPCNetworkManager npcNetworkManager;
+	private final MinecraftServer mcServer;
+
 	public static JavaPlugin plugin;
-	private MinecraftServer mcServer;
 
 	public NPCManager(JavaPlugin plugin) {
 		mcServer = ((CraftServer)plugin.getServer()).getServer();

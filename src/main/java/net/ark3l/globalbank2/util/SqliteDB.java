@@ -46,8 +46,8 @@ public class SqliteDB {
 	}
 
 	public static void prepare() {
-		Connection conn = null;
-		Statement st = null;
+		Connection conn;
+		Statement st;
 		try {
 			conn = SqliteDB.getConnection();
 			st = conn.createStatement();
@@ -61,8 +61,8 @@ public class SqliteDB {
 
 
 	public static boolean newBanker(String bankname, Location l) {
-		Connection conn = null;
-		Statement st = null;
+		Connection conn;
+		Statement st;
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -79,8 +79,8 @@ public class SqliteDB {
 	}
 
 	public static boolean delBanker(String bankname) {
-		Connection conn = null;
-		Statement st = null;
+		Connection conn;
+		Statement st;
 		try {
 			conn = getConnection();
 			st = conn.createStatement();
@@ -97,8 +97,8 @@ public class SqliteDB {
 	}
 
 	public static HashMap<Location, String> getBankers() {
-		Connection conn = null;
-		Statement st = null;
+		Connection conn;
+		Statement st;
 		HashMap<Location, String> npcs = new HashMap<Location, String>();
 		try {
 			conn = getConnection();

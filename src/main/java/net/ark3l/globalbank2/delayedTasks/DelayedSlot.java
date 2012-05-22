@@ -12,9 +12,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class DelayedSlot implements Runnable {
-	public int i;
-	public Player p;
-	public GlobalBank b;
+	private final int i;
+	private final Player p;
+	private final GlobalBank b;
 
 	public DelayedSlot(Player p, int i, GlobalBank b) {
 		this.p = p;
@@ -33,7 +33,7 @@ public class DelayedSlot implements Runnable {
 		b.isk.put(p, iss);
 		content[0] = ChestBack;
 		content[1] = PaperSort;
-		ItemStack[] is = null;
+		ItemStack[] is;
 		if (SlotDataMethods.getAccContent(p, i + 1) != null) {
 			is = SlotDataMethods.getAccContent(p, i + 1).clone();
 			for (int i = 0; i < is.length; i++) {

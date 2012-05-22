@@ -11,9 +11,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 
 public class DelayedBank implements Runnable {
-	public Player p;
-	public GlobalBank b;
-	public int maxSlots;
+	private final Player p;
+	private final GlobalBank b;
+	private final int maxSlots;
 
 	public DelayedBank(Player p, GlobalBank b, int maxSlots) {
 		this.p = p;
