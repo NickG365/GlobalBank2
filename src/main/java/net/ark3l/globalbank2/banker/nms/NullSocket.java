@@ -1,4 +1,4 @@
-package com.topcat.npclib.nms;
+package net.ark3l.globalbank2.banker.nms;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;

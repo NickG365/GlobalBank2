@@ -1,6 +1,6 @@
 package net.ark3l.globalbank2;
 
-import com.topcat.npclib.NPCManager;
+import net.ark3l.globalbank2.banker.NPCManager;
 import net.ark3l.globalbank2.listeners.BEntityListener;
 import net.ark3l.globalbank2.listeners.BInventoryListener;
 import net.ark3l.globalbank2.listeners.BPlayerListener;

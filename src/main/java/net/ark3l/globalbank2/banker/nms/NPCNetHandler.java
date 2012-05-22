@@ -1,4 +1,4 @@
-package com.topcat.npclib.nms;
+package net.ark3l.globalbank2.banker.nms;
 
 import net.minecraft.server.EntityPlayer;
 import net.minecraft.server.NetServerHandler;
@@ -22,7 +22,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.craftbukkit.CraftServer;
 import org.bukkit.craftbukkit.entity.CraftPlayer;
 
-import com.topcat.npclib.NPCManager;
+import net.ark3l.globalbank2.banker.NPCManager;
 
 /**
  * 
@@ -31,7 +31,7 @@ import com.topcat.npclib.NPCManager;
 public class NPCNetHandler extends NetServerHandler {
 
 	public NPCNetHandler(NPCManager npcManager, EntityPlayer entityplayer) {
-		super(npcManager.getServer().getMCServer(), npcManager.getNPCNetworkManager(), entityplayer);
+		super(npcManager.getMcServer(), npcManager.getNPCNetworkManager(), entityplayer);
 	}
 
 	@Override

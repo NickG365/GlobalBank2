@@ -1,6 +1,6 @@
 package net.ark3l.globalbank2.listeners;
 
-import com.topcat.npclib.entity.Banker;
+import net.ark3l.globalbank2.banker.entity.Banker;
 import net.ark3l.globalbank2.GlobalBank;
 import net.ark3l.globalbank2.util.SqliteDB;
 import org.bukkit.ChatColor;

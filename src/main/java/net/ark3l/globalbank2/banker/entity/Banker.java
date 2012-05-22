@@ -1,8 +1,6 @@
-package com.topcat.npclib.entity;
+package net.ark3l.globalbank2.banker.entity;
 
-import com.topcat.npclib.nms.NPCEntity;
 import net.minecraft.server.Entity;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.HumanEntity;
 import org.bukkit.inventory.ItemStack;
@@ -27,15 +25,6 @@ public class Banker {
 		((HumanEntity) getEntity().getBukkitEntity()).setItemInHand(new ItemStack(m, 1, damage));
 	}
 
-	public void setName(String name) {
-		((NPCEntity) getEntity()).name = name;
-	}
-
-	public String getName() {
-		return ((NPCEntity) getEntity()).name;
-	}
-
-
 	public Entity getEntity() {
 		return entity;
 	}
@@ -50,10 +39,6 @@ public class Banker {
 
 	public org.bukkit.entity.Entity getBukkitEntity() {
 		return entity.getBukkitEntity();
-	}
-
-	public void moveTo(Location l) {
-		getBukkitEntity().teleport(l);
 	}
 
 	@Override

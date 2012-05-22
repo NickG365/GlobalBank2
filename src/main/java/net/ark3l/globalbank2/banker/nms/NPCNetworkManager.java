@@ -1,10 +1,10 @@
-package com.topcat.npclib.nms;
-
-import java.lang.reflect.Field;
+package net.ark3l.globalbank2.banker.nms;
 
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.NetworkManager;
 import net.minecraft.server.Packet;
+
+import java.lang.reflect.Field;
 
 /**
  *
