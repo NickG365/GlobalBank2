@@ -18,6 +18,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.server.PluginDisableEvent;
 import org.bukkit.event.world.ChunkLoadEvent;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.getspout.spoutapi.player.SpoutPlayer;
 
 import java.lang.reflect.Method;
 import java.util.*;
@@ -121,6 +122,11 @@ public class NPCManager {
 			npcEntity.setPositionRotation(l.getX(), l.getY(), l.getZ(), l.getYaw(), l.getPitch());
 			world.getWorldServer().addEntity(npcEntity); //the right way
 			Banker npc = new Banker(npcEntity, bankName);
+
+			if(Bukkit.getPluginManager().isPluginEnabled("Spout")) {
+				((SpoutPlayer)npc.getBukkitEntity()).setSkin("http://dl.dropbox.com/u/18216599/images/bankersskin.png");
+			}
+
 			bankers.put(id, npc);
 			return npc;
 		}
