@@ -19,7 +19,7 @@ public class Banker {
 	public Banker(Entity entity, String bankName) {
 		this.entity = entity;
 		this.bankName = bankName;
-		setItemInHand(Material.PAPER);
+		setItemInHand(Material.PAPER, (short) 0);
 	}
 
 	public SpoutPlayer getSpoutPlayer() {
@@ -35,10 +35,6 @@ public class Banker {
 			Bukkit.getServer().getLogger().warning("Cannot get spout player without spout installed");
 		}
 		return null;
-	}
-
-	public void setItemInHand(Material m) {
-		setItemInHand(m, (short) 0);
 	}
 
 	public void setItemInHand(Material m, short damage) {
@@ -63,10 +59,7 @@ public class Banker {
 
 	@Override
 	public boolean equals(Object obj) {
-		if(obj instanceof Banker) {
-			return getBukkitEntity().getEntityId() == ((Banker) obj).getBukkitEntity().getEntityId();
-		}
-		return false;
+		return obj instanceof Banker && getBukkitEntity().getEntityId() == ((Banker) obj).getBukkitEntity().getEntityId();
 	}
 
 }
