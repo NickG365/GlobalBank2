@@ -50,9 +50,9 @@ public class SettingsManager {
 		return (o instanceof Integer) ? (Integer) o : i;
 	}
 
-	public String getStringValue(String s) {
-		Object o = this.getValue(s, "Error");
-		return (o instanceof String) ? (String) o : "Error";
+	public String getStringValue(String s, String def) {
+		Object o = this.getValue(s, def);
+		return (o instanceof String) ? (String) o : def;
 	}
 
 	public Boolean getBooleanValue(String s, Boolean i) {

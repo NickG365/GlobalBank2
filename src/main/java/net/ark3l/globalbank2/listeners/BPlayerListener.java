@@ -27,14 +27,14 @@ public class BPlayerListener implements Listener {
 				p.sendMessage(ChatColor.BLUE
 						+ "[B] "
 						+ ChatColor.RED
-						+ b.settings.getStringValue("Strings.Noperm"));
+						+ b.settings.getStringValue("Strings.Noperm", "You do not have permission to use banks!"));
 				return;
 			}
 			SimpleMethods.openBank(b, p);
 			p.sendMessage(ChatColor.BLUE
 					+ "[B] "
 					+ ChatColor.WHITE
-					+ b.settings.getStringValue("Strings.Open")
+					+ b.settings.getStringValue("Strings.Open", "Welcome to")
 					+ " "
 					+ ChatColor.GOLD
 					+ (b.manager.getBanker(b.manager.getNPCIdFromEntity(e.getRightClicked()))).bankName
