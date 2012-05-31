@@ -100,8 +100,10 @@ public class SimpleMethods {
 			return 27;
 		} else if(player.hasPermission("gb.slots.18")) {
 			return 18;
-		} else {
+		} else if(player.hasPermission("gb.slots.9")) {
 			return 9;
+		} else {
+			return 1;
 		}
 	}
 }
